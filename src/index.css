@@ -1,0 +1,26 @@
+.nav-link.active {
+  color: rgb(138, 43, 226);
+  
+  background-color: rgba(138, 43, 226, 0.5);
+  border-radius: 10px 10px 10px 10px;
+}
+.footer{
+  background-color: rgb(9, 2, 26);
+}
+
+
+@media screen and (max-width: 768px) {
+  .nav-link {
+    color: rgb(138, 43, 226);
+    gap: 10px;
+    border-radius: 10px 10px 10px 10px;
+    transition: all 0.3s ease !important;
+    margin-bottom:3px ;
+  }
+  .nav-link:hover {
+    color: rgb(138, 43, 226);
+    background-color: rgba(138, 43, 226, 0.3);
+    border-radius: 10px 10px 10px 10px;
+   
+  }
+}
