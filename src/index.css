@@ -23,7 +23,7 @@
   }
   .nav-link:hover {
     color: blue;
-    background-color: rgba(0, 0, 255, 0.4);
+    background-color: rgba(103, 103, 164, 0.8);
     border-radius: 10px 10px 10px 10px;
    
   }

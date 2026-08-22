@@ -7,15 +7,33 @@ function Home() {
 
     return (
         <>
-            <div className='container-fluid'>
+            <div className='container-fluid d-flex align-items-center'style={{ height: "100vh" }}>
                 <div className='row g-4'>
 
-                    <div className=' col-sm-6 col-md-6 col-lg-6'>
-                        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam necessitatibus error rerum, reiciendis explicabo eos molestias unde repellat ut earum vero magni ea consectetur neque a accusamus adipisci quas illo.</h2>
-                        <button>click</button>
-                        <button>Click</button>
+                    <div className=' col-sm-6 col-md-8 col-lg-8'>
+                      <h1 className='display-2 fw-bold'>Everything you love, <span className='text-primary'>delivered fast.</span></h1>
+                      <p className='col-sm-6 col-md-8 col-lg-8'>Discover thousands of curated products across beauty, tech, home and fashion — with honest pricing and free delivery on orders over $50.</p>
+                        <div class="d-grid gap-2 d-md-block py-3">
+                             <button class="btn btn-primary mx-2" type="button">Shop Now</button>
+                              <button class="btn btn-outline-primary gap-2" type="button">Browse best seller</button>
+                                </div>
+                                <div className='d-flex justify-content-start flex-wrap my-3'>
+                                <div className="col-12 col-md-4 mb-4">
+                                          <h2 className="display-5 fw-bold">10k+</h2>
+                                          <p className="text-muted">Products</p>
+                                    </div>
+                                <div className="col-12 col-md-4 mb-4">
+                                      <h2 className="display-5 fw-bold">4.8/5</h2>
+                                            <p className="text-muted">Avg. rating</p>
+                                                    </div>
+
+                                                        <div className="col-12 col-md-4 mb-4">
+                                                              <h2 className="display-5 fw-bold">24h</h2>
+                                                                     <p className="text-muted">Dispatch</p>
+                                                                                              </div>
+                                                                                              </div>
                     </div>
-                    <div className='col-sm-6 col-md-6 col-lg-6'>
+                    <div className='col-sm-6 col-md-4 col-lg-4'>
                         <img src={hero} alt="hero" />
                     </div>
                 </div>
