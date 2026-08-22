@@ -1,8 +1,7 @@
 .nav-link.active {
-  color:blue !important;
-  border-bottom:1px blue !important ;
-  
-  
+  color: blue !important;
+  border-bottom: 1px solid blue !important;
+  display: inline-block;
 }
 .footer{
   background-color: rgb(9, 2, 26);
