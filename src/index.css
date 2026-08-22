@@ -1,25 +1,31 @@
 .nav-link.active {
-  color: rgb(138, 43, 226);
-  
+  color:blue !important;
+  border-bottom:1px blue !important ;
   
   
 }
 .footer{
   background-color: rgb(9, 2, 26);
 }
+.btn-outline-dark {
+  transition: transform 0.8s ease !important;
+}
 
+.btn-outline-dark:hover {
+  transform: scale(1.06) !important;
+}
 
 @media screen and (max-width: 768px) {
   .nav-link {
-    color: rgb(138, 43, 226);
+    color: blue;
     gap: 10px;
     border-radius: 10px 10px 10px 10px;
     transition: all 0.3s ease !important;
     margin-bottom:3px ;
   }
   .nav-link:hover {
-    color: rgb(138, 43, 226);
-    background-color: rgba(138, 43, 226, 0.3);
+    color: blue;
+    background-color: rgba(0, 0, 255, 0.4);
     border-radius: 10px 10px 10px 10px;
    
   }

@@ -68,27 +68,113 @@ function Home() {
   </div>
 </div>
 <hr />
-<div className='container-fluid'>
-    <div className='row g-4'>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button></button>
-        <button>
-            
-            </button>
-            <button>
+<div className="container-fluid">
+  <div className="row g-3">
+    <h1>Shop by category</h1>
 
-            </button>
-
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Beauty</strong>
+        <br />
+        Explore
+      </a>
     </div>
+
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Fragrances</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Furniture</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+    
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+    
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+    
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+    
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+    
+    <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+      <a
+        href="#"
+        className="btn btn-outline-primary w-100 py-4"
+      >
+        <strong>Groceries</strong>
+        <br />
+        Explore
+      </a>
+    </div>
+
+
+  </div>
 </div>
+<hr />
 
 
             
