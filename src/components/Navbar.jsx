@@ -1,16 +1,14 @@
-// import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar  bg-body-tertiary">
+    <nav className="navbar bg-body-tertiary">
+      <div className="container-fluid">
+        <div className="leftSide d-flex align-items-center">
 
-      <div className="container-fluid d-flex justify-content-between">
-        <div className="leftSide">
 
-          {/* Toggle Button */}
           <button
-            className="bg-transparent border-0"
+            className="bg-transparent border-0 d-lg-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#sideNav"
@@ -18,25 +16,67 @@ function Navbar() {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-
           </button>
+
           {/* Logo */}
-          <NavLink className="navbar-brand  m-2 " >
+          <NavLink className="navbar-brand m-2" to="/">
             Shoply
           </NavLink>
+
         </div>
 
-        <div className="RightSide d-flex flex-row justify-content-between gap-4">
+        {/* Sidebar Links appear in Navbar on LG+ */}
+        <div className="d-none d-lg-flex align-items-center gap-4">
 
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Home
+          </NavLink>
+
+          <NavLink
+            to="/products"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Products
+          </NavLink>
+
+          <NavLink
+            to="/card"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Cart
+          </NavLink>
+
+          <NavLink
+            to="/Catigories"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Categories
+          </NavLink>
+
+        </div>
+
+        {/* Right Side */}
+        <div className="RightSide d-flex align-items-center gap-4">
 
           {/* Wishlist */}
           <NavLink to="/wishlist" className="text-dark fs-4">
-            <i class="bi bi-bag-heart"></i>
+            <i className="bi bi-bag-heart"></i>
           </NavLink>
 
           {/* Cart */}
           <NavLink to="/card" className="text-dark fs-4">
-            <i class="bi bi-basket3"></i>
+            <i className="bi bi-basket3"></i>
           </NavLink>
 
           {/* Login */}
@@ -46,9 +86,7 @@ function Navbar() {
 
         </div>
 
-
-
-        {/* Side Navigation */}
+        {/* Offcanvas Sidebar - only used below LG */}
         <div
           className="offcanvas offcanvas-start"
           tabIndex="-1"
@@ -56,22 +94,22 @@ function Navbar() {
           aria-labelledby="sideNavLabel"
         >
 
-
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="sideNavLabel">
-              <i class="bi bi-basket2"></i>
+              <i className="bi bi-basket2"></i>
               Shoply
             </h5>
 
             <button
               type="button"
-              className="btn-close "
+              className="btn-close"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
           </div>
 
           <div className="offcanvas-body">
+
             <ul className="navbar-nav">
 
               <li className="nav-item">
@@ -100,26 +138,29 @@ function Navbar() {
                 <NavLink
                   to="/card"
                   className={({ isActive }) =>
-                    isActive ? "nav-link active" : "nav-link "
+                    isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                  Card
+                  Cart
                 </NavLink>
               </li>
-            
-              <li className="nav-item disabled">
+
+              <li className="nav-item">
                 <NavLink
                   to="/Catigories"
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                  CATEGORIES
+                  Categories
                 </NavLink>
               </li>
+
             </ul>
+
           </div>
         </div>
+
       </div>
     </nav>
   );
