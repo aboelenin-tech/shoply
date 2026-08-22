@@ -19,7 +19,8 @@ function Navbar() {
           </button>
 
           {/* Logo */}
-          <NavLink className="navbar-brand m-2" to="/">
+          <NavLink className="navbar-brand m-2 logo" to="/">
+            <i className="bi bi-bag-heart-fill"></i>
             Shoply
           </NavLink>
 
