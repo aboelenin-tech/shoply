@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
@@ -70,12 +70,12 @@ function Navbar() {
 
               <li className="nav-item">
                 <NavLink
-                  to="/cart"
+                  to="/card"
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                  Cart
+                  Card
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -88,28 +88,28 @@ function Navbar() {
                   wishlist
                 </NavLink>
               </li>
-              <ul>
-              <li className="nav-item disabled">
-                <NavLink
-                  to="/Catigories"
-                  className={({ isActive }) =>
-                    isActive ? "nav-link active" : "nav-link"
-                  }
-                >
-                 CATEGORIES
-                </NavLink>
-                </li>
-              </ul>
               
+                <li className="nav-item disabled">
+                  <NavLink
+                    to="/Catigories"
+                    className={({ isActive }) =>
+                      isActive ? "nav-link active" : "nav-link"
+                    }
+                  >
+                    CATEGORIES
+                  </NavLink>
+                </li>
+              
+
 
             </ul>
 
-            
+
           </div>
-          
+
 
         </div>
-        
+
 
       </div>
     </nav>
