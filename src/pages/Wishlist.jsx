@@ -2,7 +2,7 @@
 
 function Wishlist() {
   return (
-    <div>Wishlist</div>
+    <div className="p-5 m-5">Wishlist</div>
   )
 }
 

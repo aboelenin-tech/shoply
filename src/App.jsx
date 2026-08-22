@@ -8,6 +8,8 @@ import Card from './pages/Card'
 import Wishlist from './pages/Wishlist'
 import Products from './pages/Products'
 import { Route, Routes } from 'react-router-dom'
+
+
 function App() {
 
   return (

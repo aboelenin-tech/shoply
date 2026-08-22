@@ -3,25 +3,50 @@ import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
-      <div className="container-fluid">
+    <nav className="navbar  bg-body-tertiary">
 
-        {/* Logo */}
-        <NavLink className="navbar-brand" to="/">
-          Shoply
-        </NavLink>
+      <div className="container-fluid d-flex justify-content-between">
+        <div className="leftSide">
 
-        {/* Toggle Button */}
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="offcanvas"
-          data-bs-target="#sideNav"
-          aria-controls="sideNav"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          {/* Toggle Button */}
+          <button
+            className="bg-transparent border-0"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sideNav"
+            aria-controls="sideNav"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+
+          </button>
+          {/* Logo */}
+          <NavLink className="navbar-brand  m-2 " >
+            Shoply
+          </NavLink>
+        </div>
+
+        <div className="RightSide d-flex flex-row justify-content-between gap-4">
+
+
+          {/* Wishlist */}
+          <NavLink to="/wishlist" className="text-dark fs-4">
+            <i class="bi bi-bag-heart"></i>
+          </NavLink>
+
+          {/* Cart */}
+          <NavLink to="/card" className="text-dark fs-4">
+            <i class="bi bi-basket3"></i>
+          </NavLink>
+
+          {/* Login */}
+          <NavLink to="/login" className="btn btn-primary">
+            Login
+          </NavLink>
+
+        </div>
+
+
 
         {/* Side Navigation */}
         <div
@@ -30,14 +55,17 @@ function Navbar() {
           id="sideNav"
           aria-labelledby="sideNavLabel"
         >
+
+
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="sideNavLabel">
+              <i class="bi bi-basket2"></i>
               Shoply
             </h5>
 
             <button
               type="button"
-              className="btn-close"
+              className="btn-close "
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
@@ -72,45 +100,26 @@ function Navbar() {
                 <NavLink
                   to="/card"
                   className={({ isActive }) =>
-                    isActive ? "nav-link active" : "nav-link"
+                    isActive ? "nav-link active" : "nav-link "
                   }
                 >
                   Card
                 </NavLink>
               </li>
-              <li className="nav-item">
+            
+              <li className="nav-item disabled">
                 <NavLink
-                  to="/wishlist"
+                  to="/Catigories"
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                  wishlist
+                  CATEGORIES
                 </NavLink>
               </li>
-              
-                <li className="nav-item disabled">
-                  <NavLink
-                    to="/Catigories"
-                    className={({ isActive }) =>
-                      isActive ? "nav-link active" : "nav-link"
-                    }
-                  >
-                    CATEGORIES
-                  </NavLink>
-                </li>
-              
-
-
             </ul>
-
-
           </div>
-
-
         </div>
-
-
       </div>
     </nav>
   );
