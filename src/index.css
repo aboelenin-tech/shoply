@@ -1,4 +1,9 @@
+html{
+  scroll-behavior: smooth;
+}
+
 .nav-link.active {
+
   color: blue !important;
 
 }

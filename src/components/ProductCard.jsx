@@ -1,23 +1,21 @@
-import React from 'react'
+import React from "react";
 
-function ProductCard() {
+function ProductCard({ product }) {
   return (
-    <>
- <div className="card w-25">
+    <div className="card h-100">
       <img
         className="card-img-top"
-        src={}
-        
-        alt={}
+        src={product.thumbnail}
+        alt={product.title}
       />
 
       <div className="card-body">
         <h3 className="card-title">
-          {}
+          {product.title}
         </h3>
 
         <p className="card-text">
-          Price: {}
+          Price: ${product.price}
         </p>
 
         <button className="btn btn-info text-white">
@@ -25,12 +23,7 @@ function ProductCard() {
         </button>
       </div>
     </div>
-    
-    
-    
-    
-    </>
-  )
+  );
 }
 
-export default ProductCard
+export default ProductCard;
