@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom"
 function Login() {
     return (
         <>
-            <div className=" bg-dark">
-                <nav className="p-3  border-bottom border-light border-opacity-10 d-flex justify-content-between">
+            <div className=" login-page">
+                <nav className="p-3 fixed-top  border-bottom border-light border-opacity-10 d-flex justify-content-between fixed">
                     <div className=" logo ">
                         <i className="bi bi-bag-heart-fill"></i>
                         Shoply
