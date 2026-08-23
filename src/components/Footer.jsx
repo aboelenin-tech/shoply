@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
 function Footer() {
   return (
     <>
-    <div className='container-fluid footer'>
+    <div className='container-fluid footer '>
         <div className='row g-4 text-light'>
             <div className='col-md-12 col-lg-3'>
                 <h3>Shoply</h3>

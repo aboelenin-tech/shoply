@@ -3,7 +3,7 @@ function Register() {
     return (
         <>
             <div className=" login-page pb-5">
-                <nav className="p-3 mb-5 border-bottom border-light border-opacity-10 d-flex justify-content-between fixed">
+                <nav className="p-3 mb-5 border-bottom border-light border-opacity-10 d-flex justify-content-between ">
                     <div className=" logo ">
                         <i className="bi bi-bag-heart-fill"></i>
                         Shoply
