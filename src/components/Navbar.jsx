@@ -18,157 +18,158 @@ function Navbar() {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <NavLink className="navbar-brand m-2 logo" to="/">
+          <NavLink className="navbar-brand m-2 logo me-4" to="/">
             <i className="bi bi-bag-heart-fill"></i>
             Shoply
           </NavLink>
 
-        </div>
+          <div className="d-none d-lg-flex align-items-center gap-4">
 
-        <div className="d-none d-lg-flex align-items-center gap-4">
-
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/products"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Products
-          </NavLink>
-
-
-
-
-
-          <div className="dropdown">
-
-            <button
-              className="nav-link dropdown-toggle border-0 bg-transparent"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
             >
-              Categories
-            </button>
+              Home
+            </NavLink>
 
-            <ul
-              className="dropdown-menu overflow-auto"
-              style={{ maxHeight: "300px" }}
+            <NavLink
+              to="/products"
+              className={({ isActive }) =>
+                isActive ? "nav-link active" : "nav-link"
+              }
             >
+              Products
+            </NavLink>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/beauty"
-                >
-                  Beauty
-                </NavLink>
-              </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/fragrances"
-                >
-                  Fragrances
-                </NavLink>
-              </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/furniture"
-                >
-                  Furniture
-                </NavLink>
-              </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/groceries"
-                >
-                  Groceries
-                </NavLink>
-              </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/sports"
-                >
-                  Sports
-                </NavLink>
-              </li>
+            <div className="dropdown">
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/electronics"
-                >
-                  Electronics
-                </NavLink>
-              </li>
+              <button
+                className="nav-link dropdown-toggle border-0 bg-transparent"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Categories
+              </button>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/laptops"
-                >
-                  Laptops
-                </NavLink>
-              </li>
+              <ul
+                className="dropdown-menu overflow-auto"
+                style={{ maxHeight: "300px" }}
+              >
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/mobile-accessories"
-                >
-                  Mobile Accessories
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/beauty"
+                  >
+                    Beauty
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/skin-care"
-                >
-                  Skin Care
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/fragrances"
+                  >
+                    Fragrances
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/mens-shirts"
-                >
-                  Men's Shirts
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/furniture"
+                  >
+                    Furniture
+                  </NavLink>
+                </li>
 
-              <li>
-                <NavLink
-                  className="dropdown-item"
-                  to="/categories/womens-dresses"
-                >
-                  Women's Dresses
-                </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/groceries"
+                  >
+                    Groceries
+                  </NavLink>
+                </li>
 
-            </ul>
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/sports"
+                  >
+                    Sports
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/electronics"
+                  >
+                    Electronics
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/laptops"
+                  >
+                    Laptops
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/mobile-accessories"
+                  >
+                    Mobile Accessories
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/skin-care"
+                  >
+                    Skin Care
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/mens-shirts"
+                  >
+                    Men's Shirts
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink
+                    className="dropdown-item"
+                    to="/categories/womens-dresses"
+                  >
+                    Women's Dresses
+                  </NavLink>
+                </li>
+
+              </ul>
+
+            </div>
 
           </div>
-
         </div>
+
+
 
         <div className="RightSide d-flex align-items-center gap-4">
 
