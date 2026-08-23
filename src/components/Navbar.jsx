@@ -45,23 +45,9 @@ function Navbar() {
             Products
           </NavLink>
 
-          <NavLink
-            to="/card"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Cart
-          </NavLink>
+         
 
-          <NavLink
-            to="/wishlist"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Wishlist
-          </NavLink>
+          
 
           <div className="dropdown">
 
