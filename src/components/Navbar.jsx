@@ -45,9 +45,9 @@ function Navbar() {
             Products
           </NavLink>
 
-         
 
-          
+
+
 
           <div className="dropdown">
 
@@ -176,14 +176,14 @@ function Navbar() {
             to="/wishlist"
             className="text-dark fs-4"
           >
-            <i className="bi bi-bag-heart"></i>
+            <i class="bi bi-suit-heart"></i>
           </NavLink>
 
           <NavLink
             to="/card"
             className="text-dark fs-4"
           >
-            <i className="bi bi-basket3"></i>
+            <i class="bi bi-cart"></i>
           </NavLink>
 
           <NavLink
@@ -265,7 +265,7 @@ function Navbar() {
                     isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                 Wishlist
+                  Wishlist
                 </NavLink>
               </li>
 
