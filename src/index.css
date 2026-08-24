@@ -18,6 +18,12 @@ html{
   transform: scale(1.06) !important;
 }
 
+.limited{
+  background-color: rgb(9, 2, 26);
+  color: aliceblue;
+}
+
+
 @media screen and (max-width: 768px) {
   .nav-link {
     color: blue;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
+
 function Products() {
   const [products, setProducts] = useState([]);
 

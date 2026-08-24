@@ -1,6 +1,23 @@
-import hero from '../assets/hero.png'
+
+import React, { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
+import axios from "axios";
+import heromain from "../assets/heromain.jpg"
 
 function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://dummyjson.com/products")
+      .then((response) => {
+        console.log(response.data.products);
+        setProducts(response.data.products);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   return (
     <>
       <section className="container-fluid py-5">
@@ -61,7 +78,7 @@ function Home() {
     }}
                           >
                             <img
-      src="https://www.whatgoesaroundnyc.com/on/demandware.static/-/Sites-storefront-catalog-wgaca/default/dw3de909d8/14_Multibrand__1.jpg"
+      src={heromain}
       alt="Luxury bags"
       className="w-100 h-100"
       style={{
@@ -245,9 +262,36 @@ function Home() {
           </div>
 
         </div>
+        
       </section>
 
+
       <hr />
+      <div className="container py-5">
+        <div className="row g-4">
+          <h2 className='fw-bold mb-4'>Featured products</h2>
+          {products.slice(0,8).map((product) => (
+            <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <hr />
+      <div className="limited container mb-5 mt-5 rounded ">
+        <div className="row g-4">
+          <h1>Extra 20% off first order </h1>
+          <p className="">Use code SHOPLY20 at checkout. Valid on every category, this week only</p>
+          <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start py-3">
+                <button className="btn btn-primary px-4 py-3">
+                  Shop Now
+                </button>
+                </div>
+        </div>
+      </div>
+
+      <hr />
+
     </>
   )
 }

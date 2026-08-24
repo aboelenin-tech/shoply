@@ -12,7 +12,9 @@ function Login() {
                         <NavLink to="/Home" className="nav-link text-white-50" >
                             Home
                         </NavLink>
-                        <NavLink to="/Register" className="nav-link text-white-50 " >
+                        <NavLink
+                         t
+                        o="/Register" className="nav-link text-white-50 " >
                             Register
                         </NavLink>
                     </div>
