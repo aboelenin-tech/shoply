@@ -5,13 +5,14 @@ import ProductCard from "../components/ProductCard";
 
 function Products() {
   const [products, setProducts] = useState([]);
-
+  
   useEffect(() => {
     axios
       .get("https://dummyjson.com/products")
       .then((response) => {
         console.log(response.data.products);
         setProducts(response.data.products);
+        
       })
       .catch((error) => {
         console.log(error);

@@ -23,6 +23,21 @@ html{
   color: aliceblue;
 }
 
+.card{
+  transition: transform 0.8s ease !important;
+}
+
+.card:hover{
+  transform: scale(1.08) !important;
+}
+
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.09);
+}
 
 @media screen and (max-width: 768px) {
   .nav-link {
