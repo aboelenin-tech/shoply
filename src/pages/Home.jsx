@@ -6,8 +6,11 @@ import heromain from "../assets/heromain.jpg"
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);  
 
   useEffect(() => {
+    getCategories();
+
     axios
       .get("https://dummyjson.com/products")
       .then((response) => {
@@ -18,6 +21,18 @@ function Home() {
         console.log(error);
       });
   }, []);
+  async function getCategories() {
+    try {
+      const response = await axios.get(
+        "https://dummyjson.com/products/categories"
+      );
+  
+      console.log(response.data);
+      setCategories(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   return (
     <>
       <section className="container-fluid py-5">
