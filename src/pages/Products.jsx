@@ -7,6 +7,7 @@ function Products() {
   const [categories, setCategories] = useState([]);
   // const [selectedCategory, setSelectedCategory] = useState("all");
   const [maxPrice, setMaxPrice] = useState(0)
+  const [search, setSearch] = useState("");
   useEffect(() => {
     getProducts();
     getCategories();
@@ -83,7 +84,26 @@ async function getProducts() {
   } catch (error) {
     console.log(error);
   }
+
 }
+
+async function searchProducts(query) {
+  if (!query.trim()) {
+    getProducts();
+    return;
+  }
+
+  try {
+    const response = await axios.get(
+      `https://dummyjson.com/products/search?q=${query}`
+    );
+
+    setProducts(response.data.products);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 return (
   <div className="container py-5">
@@ -91,6 +111,29 @@ return (
     <h1 className="fw-bold mb-4">
       Products
     </h1>
+    <div className="input-group mb-4">
+
+<input
+  type="text"
+  className="form-control"
+  placeholder="Search products..."
+  value={search}
+  onChange={(e) => setSearch(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      searchProducts(search);
+    }
+  }}
+/>
+
+<button
+  className="btn btn-primary"
+  onClick={() => searchProducts(search)}
+>
+  <i className="bi bi-search"></i>
+</button>
+
+</div>
     <div className="d-flex flex-column w-25 ">
       <label htmlFor="maxPrice" className="fw-100">Max Price</label>
       <input
