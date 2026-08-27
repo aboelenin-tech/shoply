@@ -3,11 +3,13 @@ import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
 function Products() {
+  const [allProducts, setAllProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  // const [selectedCategory, setSelectedCategory] = useState("all");
-  const [maxPrice, setMaxPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
+
   useEffect(() => {
     getProducts();
     getCategories();
@@ -19,185 +21,180 @@ function Products() {
         "https://dummyjson.com/products/categories"
       );
 
-      console.log(response.data);
       setCategories(response.data);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function getProductsByCategory(category) {
+  async function getProducts() {
     try {
       const response = await axios.get(
-        `https://dummyjson.com/products/category/${category}`
+        "https://dummyjson.com/products?limit=0"
       );
-      // setSelectedCategory(category)
+
+      setAllProducts(response.data.products);
+      setProducts(response.data.products);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function filterProducts(price, category) {
+    let filteredProducts = allProducts;
+
+    // Category filter
+    if (category !== "all") {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.category === category
+      );
+    }
+
+    // Price filter
+    if (price > 0) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.price <= price
+      );
+    }
+
+    setProducts(filteredProducts);
+  }
+
+  function handleCategory(category) {
+    setSelectedCategory(category);
+    filterProducts(maxPrice, category);
+  }
+
+  function handlePrice(e) {
+    const value = Number(e.target.value);
+
+    setMaxPrice(value);
+    filterProducts(value, selectedCategory);
+  }
+///////////////////////////////////////////////////
+  async function searchProducts(query) {
+    if (!query.trim()) {
+      getProducts();
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `https://dummyjson.com/products/search?q=${query}`
+      );
 
       setProducts(response.data.products);
     } catch (error) {
       console.log(error);
     }
   }
-  async function priceFilterProducts(maxPrice) {
-    try {
-      const response = await axios.get("https://dummyjson.com/products?limit=0");
-      if (maxPrice === 0) { setProducts(response.data.products) }
-      else { setProducts(response.data.products.filter((el) => el.price <= maxPrice)); }
-    }
-    catch (error) { console.log(error); }
-  }
 
-  // async function priceFilterProducts(maxPrice) {
-  //   try {
+  return (
+    <div className="container py-5">
 
-  //     const response = await axios.get(
-  //       "https://dummyjson.com/products?limit=0"
-  //     );
+      <h1 className="fw-bold mb-4">
+        Products
+      </h1>
 
-  //     if (maxPrice === 0 && selectedCategory !== "all") {
-  //       setProducts(response.data.products.filter((el) => el.category === selectedCategory))
-  //     }
-  //     else if (maxPrice === 0 && selectedCategory === "all") {
-  //       setProducts(response.data.products);
-  //     }
-  //     else if (selectedCategory !== "all") {
-  //       setProducts(response.data.products.filter((el) => { return el.category === selectedCategory && el.price <= maxPrice }))
+      {/* Search */}
+      <div className="input-group mb-4">
 
-  //     }
-  //     else {
-  //       setProducts(response.data.products.filter((el) => { return el.price <= maxPrice }))
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchProducts(search);
+            }
+          }}
+        />
 
-
-
-
-async function getProducts() {
-  try {
-    const response = await axios.get(
-      "https://dummyjson.com/products?limit=0"
-    );
-
-    setProducts(response.data.products);
-  } catch (error) {
-    console.log(error);
-  }
-
-}
-
-async function searchProducts(query) {
-  if (!query.trim()) {
-    getProducts();
-    return;
-  }
-
-  try {
-    const response = await axios.get(
-      `https://dummyjson.com/products/search?q=${query}`
-    );
-
-    setProducts(response.data.products);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-
-return (
-  <div className="container py-5">
-
-    <h1 className="fw-bold mb-4">
-      Products
-    </h1>
-    <div className="input-group mb-4">
-
-<input
-  type="text"
-  className="form-control"
-  placeholder="Search products..."
-  value={search}
-  onChange={(e) => setSearch(e.target.value)}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      searchProducts(search);
-    }
-  }}
-/>
-
-<button
-  className="btn btn-primary"
-  onClick={() => searchProducts(search)}
->
-  <i className="bi bi-search"></i>
-</button>
-
-</div>
-    <div className="d-flex flex-column w-25 ">
-      <label htmlFor="maxPrice" className="fw-100">Max Price</label>
-      <input
-        type="range"
-        min="0"
-        max="1000"
-        name="maxPrice"
-        id="maxPrice"
-        step="10"
-        value={maxPrice}
-        className="w-50"
-        onChange={(e) => {
-         setMaxPrice(e.target.value);
-  priceFilterProducts(e.target.value);
-        }}
-      />
-      <div >
-        <span className="text-dark">{maxPrice}$</span>
+        <button
+          className="btn btn-primary"
+          onClick={() => searchProducts(search)}
+        >
+          <i className="bi bi-search"></i>
+        </button>
 
       </div>
-    </div>
 
-    <div className="d-flex flex-wrap gap-2 mb-5">
+      {/* Price Slider */}
+      <div className="d-flex flex-column w-25 mb-4">
 
-      <button
-        className="btn btn-primary"
-        onClick={getProducts}
-      >
-        All Products
-      </button>
+        <label htmlFor="maxPrice">
+          Max Price
+        </label>
 
-      {categories.map((category) => (
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          step="10"
+          value={maxPrice}
+          id="maxPrice"
+          className="w-50"
+          onChange={handlePrice}
+        />
+
+        <span>
+          {maxPrice}$
+        </span>
+
+      </div>
+
+      {/* Categories */}
+      <div className="d-flex flex-wrap gap-2 mb-5">
+
         <button
-          key={category.slug}
-          className="btn btn-outline-primary"
-          onClick={() => {
-            getProductsByCategory(category.slug)
-
-
+          className={
+            selectedCategory === "all"
+              ? "btn btn-primary"
+              : "btn btn-outline-primary"
           }
-
-          }
+          onClick={() => handleCategory("all")}
         >
-          {category.name}
+          All Products
         </button>
-      ))}
+
+        {categories.map((category) => (
+
+          <button
+            key={category.slug}
+            className={
+              selectedCategory === category.slug
+                ? "btn btn-primary"
+                : "btn btn-outline-primary"
+            }
+            onClick={() => handleCategory(category.slug)}
+          >
+            {category.name}
+          </button>
+
+        ))}
+
+      </div>
+
+      {/* Products */}
+      <div className="row g-4">
+
+        {products.map((product) => (
+
+          <div
+            className="col-12 col-sm-6 col-md-4 col-lg-3"
+            key={product.id}
+          >
+            <ProductCard product={product} />
+          </div>
+
+        ))}
+
+      </div>
 
     </div>
-
-    <div className="row g-4">
-
-      {products.map((product) => (
-        <div
-          className="col-12 col-sm-6 col-md-4 col-lg-3"
-          key={product.id}
-        >
-          <ProductCard product={product} />
-        </div>
-      ))}
-
-    </div>
-
-  </div>
-);
+  );
 }
 
 export default Products;
