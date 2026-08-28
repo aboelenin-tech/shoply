@@ -9,6 +9,7 @@ function Products() {
   const [maxPrice, setMaxPrice] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
+  const [rating, setRating] = useState(0)
 
   useEffect(() => {
     getProducts();
@@ -40,7 +41,8 @@ function Products() {
     }
   }
 
-  function filterProducts(price, category) {
+
+  function filterProducts(price, category, rating) {
     let filteredProducts = allProducts;
 
     // Category filter
@@ -57,21 +59,32 @@ function Products() {
       );
     }
 
+    //rating filter
+    if (rating > 0) {
+      filteredProducts = filteredProducts.filter(
+        (product) => product.rating >= rating
+      );
+    }
+
     setProducts(filteredProducts);
   }
+  function handelrating(value) {
+    setRating(value)
+    filterProducts(maxPrice, selectedCategory, value);
 
+  }
   function handleCategory(category) {
     setSelectedCategory(category);
-    filterProducts(maxPrice, category);
+    filterProducts(maxPrice, category, rating);
   }
 
   function handlePrice(e) {
     const value = Number(e.target.value);
 
     setMaxPrice(value);
-    filterProducts(value, selectedCategory);
+    filterProducts(value, selectedCategory, rating);
   }
-///////////////////////////////////////////////////
+  ///////////////////////////////////////////////////
   async function searchProducts(query) {
     if (!query.trim()) {
       getProducts();
@@ -121,30 +134,54 @@ function Products() {
 
       </div>
 
-      {/* Price Slider */}
-      <div className="d-flex flex-column w-25 mb-4">
 
-        <label htmlFor="maxPrice">
-          Max Price
-        </label>
+      <div className="d-flex flex-row">
+        {/* Price Slider */}
+        <div className="d-flex flex-column w-25 mb-4">
 
-        <input
-          type="range"
-          min="0"
-          max="1000"
-          step="10"
-          value={maxPrice}
-          id="maxPrice"
-          className="w-50"
-          onChange={handlePrice}
-        />
+          <label htmlFor="maxPrice">
+            Max Price
+          </label>
 
-        <span>
-          {maxPrice}$
-        </span>
+          <input
+            type="range"
+            min="0"
+            max="1000"
+            step="10"
+            value={maxPrice}
+            id="maxPrice"
+            className="w-50"
+            onChange={handlePrice}
+          />
+
+          <span>
+            {maxPrice}$
+          </span>
+
+        </div>
+        {/*rating filter */}
+        <div className="d-flex align-items-center gap-2 p-3 bg-white rounded-3 ">
+          <span className="fw-semibold">Min Rating:</span>
+
+          <div className="d-flex gap-1">
+            {[1, 2, 3, 4, 4.5].map((star) => (
+              <i
+                key={star}
+                className={`bi ${star <= rating ? "bi-star-fill text-warning" : "bi-star text-secondary"
+                  }`}
+                onClick={() =>{ setRating(star)
+                  handelrating(star)
+                }}
+                style={{
+                  fontSize: "24px",
+                  cursor: "pointer",
+                }}
+              ></i>
+            ))}
+          </div>
+        </div>
 
       </div>
-
       {/* Categories */}
       <div className="d-flex flex-wrap gap-2 mb-5">
 
