@@ -102,6 +102,22 @@ function Products() {
     }
   }
 
+  {/*sorting*/ }
+  function sortingPriceAs() {
+    setProducts([...products].sort((a, b) => a.price - b.price))
+  }
+  function sortingPricedes() {
+    setProducts([...products].sort((a, b) => b.price - a.price))
+  }
+
+  function sortingRatingAs() {
+    setProducts([...products].sort((a, b) => a.rating - b.rating))
+  }
+  function sortingRatingdes() {
+    setProducts([...products].sort((a, b) => b.rating - a.rating))
+  }
+
+
   return (
     <div className="container py-5">
 
@@ -135,7 +151,7 @@ function Products() {
       </div>
 
 
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row align-items-center gap-4">
         {/* Price Slider */}
         <div className="d-flex flex-column w-25 mb-4">
 
@@ -146,11 +162,11 @@ function Products() {
           <input
             type="range"
             min="0"
-            max="1000"
+            max="5000"
             step="10"
             value={maxPrice}
             id="maxPrice"
-            className="w-50"
+            className=""
             onChange={handlePrice}
           />
 
@@ -169,7 +185,8 @@ function Products() {
                 key={star}
                 className={`bi ${star <= rating ? "bi-star-fill text-warning" : "bi-star text-secondary"
                   }`}
-                onClick={() =>{ setRating(star)
+                onClick={() => {
+                  setRating(star)
                   handelrating(star)
                 }}
                 style={{
@@ -180,7 +197,21 @@ function Products() {
             ))}
           </div>
         </div>
+        {/*sorting */}
+        <div>
+          <div className="dropdown">
+            <button className="bg-primary border-0 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              sorting
+            </button>
+            <ul className="dropdown-menu">
+              <li><button onClick={sortingPriceAs} className="dropdown-item" href="#">Price: Low to High</button></li>
+              <li><button onClick={sortingPricedes} className="dropdown-item" href="#">Price: High to Low</button></li>
+              <li><button onClick={sortingRatingAs} className="dropdown-item" href="#">Rating: Low to High</button></li>
+              <li><button onClick={sortingRatingdes} className="dropdown-item" href="#">Rating: High to Low</button></li>
+            </ul>
+          </div>
 
+        </div>
       </div>
       {/* Categories */}
       <div className="d-flex flex-wrap gap-2 mb-5">
