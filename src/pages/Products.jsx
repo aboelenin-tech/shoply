@@ -10,7 +10,13 @@ function Products() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [rating, setRating] = useState(0)
-
+  //for pagination 
+  const [currentPage, setCurrentPage] = useState(1)
+  const productsPerPage = 12
+  const startPoint = (currentPage - 1) * productsPerPage;
+  const endPoint = startPoint + productsPerPage;
+  const totalPages = Math.ceil((products.length) / productsPerPage);
+  const currentProducts = products.slice(startPoint, endPoint)
   useEffect(() => {
     getProducts();
     getCategories();
@@ -116,6 +122,8 @@ function Products() {
   function sortingRatingdes() {
     setProducts([...products].sort((a, b) => b.rating - a.rating))
   }
+
+
 
 
   return (
@@ -248,7 +256,7 @@ function Products() {
       {/* Products */}
       <div className="row g-4">
 
-        {products.map((product) => (
+        {currentProducts .map((product) => (
 
           <div
             className="col-12 col-sm-6 col-md-4 col-lg-3"
@@ -260,6 +268,30 @@ function Products() {
         ))}
 
       </div>
+
+
+  <nav aria-label="pagination">
+  <ul className="pagination  justify-content-center">
+
+    {Array.from({ length: totalPages }, (ele, index) => (
+      <li
+        key={index}
+        className={`page-item ${
+          currentPage === index + 1 ? "active" : ""
+        }`}
+      >
+        <button
+          className="page-link"
+          onClick={() => setCurrentPage(index + 1)}
+        >
+          {index + 1}
+        </button>
+      </li>
+    ))}
+
+  </ul>
+</nav>
+
 
     </div>
   );
