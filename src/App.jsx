@@ -10,6 +10,8 @@ import Products from './pages/Products'
 import Layout from './layout'
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import ProductDetails from './pages/ProductDetails'
+
 function App() {
 
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path='/card' element={<Card />} />
           <Route path='/wishlist' element={<Wishlist />} />
           <Route path='/products' element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetails />} />
 
         </Route>
         <Route path='/login' element={<Login />} />

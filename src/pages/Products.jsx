@@ -307,7 +307,7 @@ function Products() {
 
 
       <nav aria-label="pagination">
-        <ul className="pagination  justify-content-center">
+        <ul className="pagination  justify-content-center m-3">
 
           {Array.from({ length: totalPages }, (ele, index) => (
             <li
