@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
+import ProductCardSkeleton from "../components/ProductCardSkeleton";
 
 function Products() {
   const [allProducts, setAllProducts] = useState([]);
@@ -44,7 +45,7 @@ function Products() {
 
     setLoading(true)
     setError("")
-    // await new Promise((resolve) => setTimeout(resolve, 2000)); // For testing loading state
+     await new Promise((resolve) => setTimeout(resolve, 2000)); // For testing loading state
 
     try {
       const response = await axios.get(
@@ -271,18 +272,23 @@ function Products() {
 
       {/* Products */}
       {/* loading*/}
-      {loading ? (<h4 className="d-flex justify-content-center align-items-center py-5 gap-2">
-        <div class="spinner-grow text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <div class="spinner-grow text-info" role="status">
-          <span className="visually-hidden">Loading...</span>
+      {loading ? (
+        <div className="row g-4">
+
+          {[1,2,3,4,5,6,7,8].map(() => (
+
+            <div
+              className="col-12 col-sm-6 col-md-4 col-lg-3"
+              
+            >
+              <ProductCardSkeleton  />
+            </div>
+
+          ))}
+
         </div>
 
-      </h4>) : (
+      ) : (
         <div className="row g-4">
 
           {currentProducts.map((product) => (
@@ -306,8 +312,8 @@ function Products() {
       )}
 
 
-      <nav aria-label="pagination">
-        <ul className="pagination  justify-content-center">
+      <nav aria-label="pagination ">
+        <ul className="pagination  justify-content-center m-4">
 
           {Array.from({ length: totalPages }, (ele, index) => (
             <li
