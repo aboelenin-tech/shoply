@@ -45,7 +45,7 @@ function Products() {
 
     setLoading(true)
     setError("")
-     await new Promise((resolve) => setTimeout(resolve, 2000)); // For testing loading state
+    await new Promise((resolve) => setTimeout(resolve, 2000)); // For testing loading state
 
     try {
       const response = await axios.get(
@@ -275,13 +275,13 @@ function Products() {
       {loading ? (
         <div className="row g-4">
 
-          {[1,2,3,4,5,6,7,8].map(() => (
+          {[1, 2, 3, 4, 5, 6, 7, 8].map(() => (
 
             <div
               className="col-12 col-sm-6 col-md-4 col-lg-3"
-              
+
             >
-              <ProductCardSkeleton  />
+              <ProductCardSkeleton />
             </div>
 
           ))}
@@ -312,8 +312,10 @@ function Products() {
       )}
 
 
-      <nav aria-label="pagination ">
-        <ul className="pagination  justify-content-center m-4">
+
+      <nav aria-label="pagination">
+        <ul className="pagination  justify-content-center m-3">
+
 
           {Array.from({ length: totalPages }, (ele, index) => (
             <li

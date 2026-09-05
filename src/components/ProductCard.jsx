@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function ProductCard({ product }) {
   const oldPrice = (
@@ -78,15 +79,28 @@ function ProductCard({ product }) {
           }
         >
           <i className="bi bi-box-seam me-1"></i>
+
           {product.stock > 10
             ? `${product.stock} in stock`
             : `Only ${product.stock} left`}
         </small>
 
-        <button className="btn btn-primary w-100 mt-auto pt-2">
-          <i className="bi bi-bag-plus me-2"></i>
-          Add to Cart
-        </button>
+        <div className="mt-auto">
+
+          <Link
+            to={`/products/${product.id}`}
+            className="btn btn-outline-primary w-100 mt-3 mb-2"
+          >
+            <i className="bi bi-eye me-2"></i>
+            View Details
+          </Link>
+
+          <button className="btn btn-primary w-100">
+            <i className="bi bi-bag-plus me-2"></i>
+            Add to Cart
+          </button>
+
+        </div>
 
       </div>
     </div>
