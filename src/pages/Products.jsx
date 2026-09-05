@@ -17,6 +17,12 @@ function Products() {
   const endPoint = startPoint + productsPerPage;
   const totalPages = Math.ceil((products.length) / productsPerPage);
   const currentProducts = products.slice(startPoint, endPoint)
+
+  /*- Handle loading states.
+  - Handle API error states. */
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("")
+
   useEffect(() => {
     getProducts();
     getCategories();
@@ -35,6 +41,11 @@ function Products() {
   }
 
   async function getProducts() {
+
+    setLoading(true)
+    setError("")
+    // await new Promise((resolve) => setTimeout(resolve, 2000)); // For testing loading state
+
     try {
       const response = await axios.get(
         "https://dummyjson.com/products?limit=0"
@@ -42,10 +53,15 @@ function Products() {
 
       setAllProducts(response.data.products);
       setProducts(response.data.products);
-    } catch (error) {
-      console.log(error);
+    } catch {
+      // console.log(error);
+      setError("Failed to load products. Please try again.");
+    }
+    finally {
+      setLoading(false)
     }
   }
+
 
 
   function filterProducts(price, category, rating) {
@@ -254,43 +270,62 @@ function Products() {
       </div>
 
       {/* Products */}
-      <div className="row g-4">
+      {/* loading*/}
+      {loading ? (<h4 className="d-flex justify-content-center align-items-center py-5 gap-2">
+        <div class="spinner-grow text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
 
-        {currentProducts .map((product) => (
+      </h4>) : (
+        <div className="row g-4">
 
-          <div
-            className="col-12 col-sm-6 col-md-4 col-lg-3"
-            key={product.id}
-          >
-            <ProductCard product={product} />
-          </div>
+          {currentProducts.map((product) => (
 
-        ))}
+            <div
+              className="col-12 col-sm-6 col-md-4 col-lg-3"
+              key={product.id}
+            >
+              <ProductCard product={product} />
+            </div>
 
-      </div>
+          ))}
+
+        </div>)
+      }
+      {/*display Error */}
+      {error && (
+        <div className="alert alert-danger">
+          {error}
+        </div>
+      )}
 
 
-  <nav aria-label="pagination">
-  <ul className="pagination  justify-content-center">
+      <nav aria-label="pagination">
+        <ul className="pagination  justify-content-center">
 
-    {Array.from({ length: totalPages }, (ele, index) => (
-      <li
-        key={index}
-        className={`page-item ${
-          currentPage === index + 1 ? "active" : ""
-        }`}
-      >
-        <button
-          className="page-link"
-          onClick={() => setCurrentPage(index + 1)}
-        >
-          {index + 1}
-        </button>
-      </li>
-    ))}
+          {Array.from({ length: totalPages }, (ele, index) => (
+            <li
+              key={index}
+              className={`page-item ${currentPage === index + 1 ? "active" : ""
+                }`}
+            >
+              <button
+                className="page-link"
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+          ))}
 
-  </ul>
-</nav>
+        </ul>
+      </nav>
 
 
     </div>
