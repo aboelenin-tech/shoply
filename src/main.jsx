@@ -6,13 +6,19 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
-
+import { Toaster } from "react-hot-toast";
 
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <StrictMode>
       <App />
+      <Toaster
+            position="top-right"
+            toastOptions={{
+                duration: 2000,
+            }}
+        />
     </StrictMode>
   </BrowserRouter>
 )

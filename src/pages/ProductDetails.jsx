@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
-
+import useCartStore from "../store/cartStore";
+import toast from "react-hot-toast";
 function ProductDetails() {
+  const addToCart = useCartStore((state) => state.addToCart);
   const { id } = useParams();
 
   const [product, setProduct] = useState(null);
@@ -223,10 +225,18 @@ function ProductDetails() {
           {/* Buttons */}
           <div className="d-flex gap-3">
 
-            <button className="btn btn-primary btn-lg flex-grow-1 rounded-3">
-              <i className="bi bi-bag-plus me-2"></i>
-              Add to Cart
-            </button>
+           
+            <button
+    className="btn btn-primary btn-lg flex-grow-1 rounded-3"
+    onClick={() => {
+      addToCart(product);
+      toast.success(`${product.title} added to cart!`);
+  }}
+>
+    <i className="bi bi-bag-plus me-2"></i>
+    Add to Cart
+</button>
+
 
             <button className="btn btn-dark btn-lg flex-grow-1 rounded-3">
               Buy Now

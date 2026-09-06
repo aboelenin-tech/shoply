@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useCartStore from "../store/cartStore";
+import toast from "react-hot-toast";
 
 function ProductCard({ product }) {
+  const addToCart = useCartStore((state) => state.addToCart);
   const oldPrice = (
     product.price /
     (1 - product.discountPercentage / 100)
@@ -95,10 +98,16 @@ function ProductCard({ product }) {
             View Details
           </Link>
 
-          <button className="btn btn-primary w-100">
-            <i className="bi bi-bag-plus me-2"></i>
-            Add to Cart
-          </button>
+          <button
+    className="btn btn-primary w-100"
+    onClick={() => {
+      addToCart(product);
+      toast.success(`${product.title} added to cart!`);
+  }}
+>
+    <i className="bi bi-bag-plus me-2"></i>
+    Add to Cart
+</button>
 
         </div>
 
