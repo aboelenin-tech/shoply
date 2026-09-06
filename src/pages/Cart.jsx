@@ -1,10 +1,14 @@
 import useCartStore from "../store/cartStore";
 import { NavLink } from "react-router-dom";
 
-function Card() {
+function Cart() {
     const cart = useCartStore((state) => state.cart);
     const removeFromCart = useCartStore((state) => state.removeFromCart);
-
+    const increaseQuantity = useCartStore((state) => state.increaseQuantity);
+    const decreaseQuantity = useCartStore((state) => state.decreaseQuantity)
+    const calcSubtotal = useCartStore((state) => state.calcSubtotal);
+    const calcShipping = useCartStore((state) => state.calcShipping);
+    const calcTotal = useCartStore((state) => state.calcTotal)
     return (
         <>
             <div className="p-4">
@@ -124,6 +128,7 @@ function Card() {
 
                                                     <button
                                                         className="btn btn-outline-primary btn-sm"
+                                                        onClick={() => decreaseQuantity(item.id)}
                                                     >
                                                         -
                                                     </button>
@@ -134,6 +139,7 @@ function Card() {
 
                                                     <button
                                                         className="btn btn-outline-primary btn-sm"
+                                                        onClick={() => increaseQuantity(item.id)}
                                                     >
                                                         +
                                                     </button>
@@ -164,7 +170,33 @@ function Card() {
 
                                 ))}
 
+                                <div className="car  border-0 shadow-sm rounded-4 p-4 mt-4">
+                                    <h4 className="fw-bold mb-4">Order Summary</h4>
+
+                                    <div className="d-flex justify-content-between mb-3">
+                                        <span className="text-muted">Subtotal</span>
+                                        <span className="fw-semibold">{calcSubtotal().toFixed(2)}</span>
+                                    </div>
+
+                                    <div className="d-flex justify-content-between mb-3">
+                                        <span className="text-muted">Shipping</span>
+                                        <span className="fw-semibold">{calcShipping().toFixed(2)}</span>
+                                    </div>
+
+                                    <hr />
+
+                                    <div className="d-flex justify-content-between align-items-center mb-4">
+                                        <span className="fs-5 fw-bold">Total</span>
+                                        <span className="fs-4 fw-bold text-primary">{calcTotal().toFixed(2)}</span>
+                                    </div>
+
+                                    <button className="btn btn-primary w-100 py-2 rounded-3">
+                                        Checkout
+                                    </button>
+                                </div>
                             </div>
+
+
 
                         )}
 
@@ -176,4 +208,4 @@ function Card() {
     );
 }
 
-export default Card;
+export default Cart;
