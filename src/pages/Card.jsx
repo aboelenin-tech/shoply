@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function Card() {
     const cart = useCartStore((state) => state.cart);
+    const removeFromCart = useCartStore((state) => state.removeFromCart);
 
     return (
         <>
@@ -26,7 +27,7 @@ function Card() {
 
                             <div className="d-flex flex-column align-items-center text-center py-5">
 
-                                {/* Basket Image */}
+                                {/* Basket Icon */}
                                 <div
                                     className="d-flex justify-content-center align-items-center rounded-circle bg-primary bg-opacity-10 mb-4"
                                     style={{
@@ -34,33 +35,19 @@ function Card() {
                                         height: "140px",
                                     }}
                                 >
-                                    <img
-                                        src="/images/empty-cart.png"
-                                        alt="Empty shopping cart"
-                                        style={{
-                                            width: "90px",
-                                            height: "90px",
-                                            objectFit: "contain",
-                                        }}
-                                    />
+                                    <i className="bi bi-basket3 fs-1 text-primary"></i>
                                 </div>
 
-
-                                {/* Title */}
                                 <h3 className="fw-bold mb-2">
                                     Your cart is empty
                                 </h3>
 
-
-                                {/* Description */}
                                 <p className="text-secondary mb-4">
                                     Looks like you haven't added anything yet.
                                     <br />
                                     Browse the catalogue and find something you love.
                                 </p>
 
-
-                                {/* Browse Button */}
                                 <NavLink
                                     to="/products"
                                     className="btn btn-primary rounded-pill px-4 py-2"
@@ -83,10 +70,10 @@ function Card() {
                                         className="border-bottom p-3"
                                     >
 
-                                        <div className="row align-items-center">
+                                        <div className="row align-items-center g-3">
 
                                             {/* Product Image */}
-                                            <div className="col-md-2 text-center">
+                                            <div className="col-12 col-md-2 text-center">
 
                                                 <img
                                                     src={item.thumbnail}
@@ -103,7 +90,7 @@ function Card() {
 
 
                                             {/* Product Info */}
-                                            <div className="col-md-6">
+                                            <div className="col-12 col-md-4">
 
                                                 <small className="text-primary fw-semibold text-uppercase">
                                                     {item.category}
@@ -113,7 +100,7 @@ function Card() {
                                                     {item.title}
                                                 </h5>
 
-                                                <p className="text-secondary mb-1">
+                                                <p className="text-secondary mb-0">
                                                     Quantity: {item.quantity}
                                                 </p>
 
@@ -121,7 +108,7 @@ function Card() {
 
 
                                             {/* Price */}
-                                            <div className="col-md-2">
+                                            <div className="col-6 col-md-2">
 
                                                 <span className="fw-bold fs-5">
                                                     ${item.price}
@@ -131,11 +118,13 @@ function Card() {
 
 
                                             {/* Quantity */}
-                                            <div className="col-md-2">
+                                            <div className="col-6 col-md-2">
 
                                                 <div className="d-flex align-items-center justify-content-center gap-2">
 
-                                                    <button className="btn btn-outline-primary btn-sm">
+                                                    <button
+                                                        className="btn btn-outline-primary btn-sm"
+                                                    >
                                                         -
                                                     </button>
 
@@ -143,11 +132,29 @@ function Card() {
                                                         {item.quantity}
                                                     </span>
 
-                                                    <button className="btn btn-outline-primary btn-sm">
+                                                    <button
+                                                        className="btn btn-outline-primary btn-sm"
+                                                    >
                                                         +
                                                     </button>
 
                                                 </div>
+
+                                            </div>
+
+
+                                            {/* Remove */}
+                                            <div className="col-12 col-md-2 text-center">
+
+                                                <button
+                                                    onClick={() =>
+                                                        removeFromCart(item.id)
+                                                    }
+                                                    className="btn btn-outline-danger btn-sm rounded-pill px-3"
+                                                >
+                                                    <i className="bi bi-trash me-1"></i>
+                                                    Remove
+                                                </button>
 
                                             </div>
 
