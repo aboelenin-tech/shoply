@@ -1,24 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useCartStore from "../store/cartStore";
 import useWishlistStore from "../store/wishlistStore";
+import useAuthStore from "../store/authStore";
 import toast from "react-hot-toast";
 
 function ProductCard({ product }) {
-  const addToCart = useCartStore(
-    (state) => state.addToCart
-  );
+  const navigate = useNavigate();
 
-  const wishlist = useWishlistStore(
-    (state) => state.wishlist
-  );
+  const addToCart = useCartStore((state) => state.addToCart);
 
+  const wishlist = useWishlistStore((state) => state.wishlist);
   const addToWishlist = useWishlistStore(
     (state) => state.addToWishlist
   );
-
   const removeFromWishlist = useWishlistStore(
     (state) => state.removeFromWishlist
+  );
+
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
   );
 
   const isInWishlist = wishlist.some(
@@ -30,7 +31,14 @@ function ProductCard({ product }) {
     (1 - product.discountPercentage / 100)
   ).toFixed(2);
 
+  // Wishlist
   const handleWishlist = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to use wishlist");
+      navigate("/login");
+      return;
+    }
+
     if (isInWishlist) {
       removeFromWishlist(product.id);
       toast.success("Removed from wishlist");
@@ -40,14 +48,20 @@ function ProductCard({ product }) {
     }
   };
 
+  // Cart
   const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      toast.error("Please login to add products to cart");
+      navigate("/login");
+      return;
+    }
+
     addToCart(product);
     toast.success(`${product.title} added to cart!`);
   };
 
   return (
     <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
-
       {/* Discount */}
       <span className="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
         -{Math.round(product.discountPercentage)}%
@@ -92,9 +106,7 @@ function ProductCard({ product }) {
         </div>
       </Link>
 
-      {/* Card Body */}
       <div className="card-body d-flex flex-column p-4">
-
         {/* Category */}
         <small className="text-primary fw-semibold text-uppercase">
           {product.category}
@@ -156,8 +168,7 @@ function ProductCard({ product }) {
 
         {/* Buttons */}
         <div className="mt-auto">
-
-          {/* View Details - Small */}
+          {/* View Details */}
           <Link
             to={`/products/${product.id}`}
             className="btn btn-outline-primary btn-sm w-100 mt-3 mb-2"
@@ -175,7 +186,6 @@ function ProductCard({ product }) {
             <i className="bi bi-bag-plus me-2"></i>
             Add to Cart
           </button>
-
         </div>
       </div>
     </div>

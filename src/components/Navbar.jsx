@@ -1,8 +1,23 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useProductStore from "../store/store";
+import useAuthStore from "../store/authStore";
 
 function Navbar() {
   const navigate = useNavigate();
+
+  // =========================
+  // Auth
+  // =========================
+
+  const user = useAuthStore((state) => state.user);
+  const isAuthenticated = useAuthStore(
+    (state) => state.isAuthenticated
+  );
+  const logout = useAuthStore((state) => state.logout);
+
+  // =========================
+  // Products
+  // =========================
 
   const handleCategory = useProductStore(
     (state) => state.handleCategory
@@ -27,11 +42,14 @@ function Navbar() {
   // =========================
 
   const closeOffcanvas = () => {
-    const offcanvasElement = document.getElementById("sideNav");
+    const offcanvasElement =
+      document.getElementById("sideNav");
 
     if (offcanvasElement && window.bootstrap) {
       const offcanvas =
-        window.bootstrap.Offcanvas.getInstance(offcanvasElement);
+        window.bootstrap.Offcanvas.getInstance(
+          offcanvasElement
+        );
 
       if (offcanvas) {
         offcanvas.hide();
@@ -55,6 +73,16 @@ function Navbar() {
   const handleCategoryClick = (category) => {
     handleCategory(category.slug);
     navigate("/products");
+    closeOffcanvas();
+  };
+
+  // =========================
+  // Logout
+  // =========================
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
     closeOffcanvas();
   };
 
@@ -121,7 +149,6 @@ function Navbar() {
 
             {/* Categories */}
             <div className="dropdown">
-
               <button
                 className="nav-link dropdown-toggle border-0 bg-transparent"
                 type="button"
@@ -149,7 +176,6 @@ function Navbar() {
                   </li>
                 ))}
               </ul>
-
             </div>
 
           </div>
@@ -187,17 +213,40 @@ function Navbar() {
             <i className="bi bi-cart"></i>
           </NavLink>
 
-          {/* Login */}
-          <NavLink
-            to="/login"
-            className={({ isActive }) =>
-              isActive
-                ? "btn btn-primary active"
-                : "btn btn-primary"
-            }
-          >
-            Login
-          </NavLink>
+          {/* Auth */}
+          {isAuthenticated ? (
+            <div className="dropdown">
+              <button
+                className="btn btn-primary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="bi bi-person-circle me-2"></i>
+                {user?.firstName || user?.username}
+              </button>
+
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li>
+                  <button
+                    type="button"
+                    className="dropdown-item text-danger"
+                    onClick={handleLogout}
+                  >
+                    <i className="bi bi-box-arrow-right me-2"></i>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <NavLink
+              to="/login"
+              className="btn btn-primary"
+            >
+              Login
+            </NavLink>
+          )}
 
         </div>
 
@@ -212,9 +261,8 @@ function Navbar() {
           aria-labelledby="sideNavLabel"
         >
 
-          {/* Offcanvas Header */}
+          {/* Header */}
           <div className="offcanvas-header">
-
             <h5
               className="offcanvas-title"
               id="sideNavLabel"
@@ -229,13 +277,9 @@ function Navbar() {
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
-
           </div>
 
-          {/* =========================
-              Offcanvas Body
-          ========================= */}
-
+          {/* Body */}
           <div className="offcanvas-body">
 
             <ul className="navbar-nav">
@@ -296,10 +340,7 @@ function Navbar() {
                 </button>
               </li>
 
-              {/* =========================
-                  Mobile Categories
-              ========================= */}
-
+              {/* Categories */}
               <li className="nav-item dropdown">
 
                 <button
@@ -333,18 +374,31 @@ function Navbar() {
 
               </li>
 
-              {/* Login */}
+              {/* Mobile Auth */}
               <li className="nav-item mt-3">
-                <button
-                  type="button"
-                  className="btn btn-primary w-100"
-                  onClick={() =>
-                    handleNavigation("/login")
-                  }
-                >
-                  <i className="bi bi-box-arrow-in-right me-2"></i>
-                  Login
-                </button>
+
+                {isAuthenticated ? (
+                  <button
+                    type="button"
+                    className="btn btn-danger w-100"
+                    onClick={handleLogout}
+                  >
+                    <i className="bi bi-box-arrow-right me-2"></i>
+                    Logout
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn btn-primary w-100"
+                    onClick={() =>
+                      handleNavigation("/login")
+                    }
+                  >
+                    <i className="bi bi-box-arrow-in-right me-2"></i>
+                    Login
+                  </button>
+                )}
+
               </li>
 
             </ul>
