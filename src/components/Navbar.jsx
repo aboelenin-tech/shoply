@@ -1,6 +1,13 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import useProductStore from "../store/store";
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleCategory = useProductStore(
+    (state) => state.handleCategory
+  );
+
   const categories = [
     { name: "Beauty", slug: "beauty" },
     { name: "Fragrances", slug: "fragrances" },
@@ -15,6 +22,42 @@ function Navbar() {
     { name: "Women's Dresses", slug: "womens-dresses" },
   ];
 
+  // =========================
+  // Close Mobile Offcanvas
+  // =========================
+
+  const closeOffcanvas = () => {
+    const offcanvasElement = document.getElementById("sideNav");
+
+    if (offcanvasElement && window.bootstrap) {
+      const offcanvas =
+        window.bootstrap.Offcanvas.getInstance(offcanvasElement);
+
+      if (offcanvas) {
+        offcanvas.hide();
+      }
+    }
+  };
+
+  // =========================
+  // Mobile Navigation
+  // =========================
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    closeOffcanvas();
+  };
+
+  // =========================
+  // Category
+  // =========================
+
+  const handleCategoryClick = (category) => {
+    handleCategory(category.slug);
+    navigate("/products");
+    closeOffcanvas();
+  };
+
   return (
     <nav className="navbar bg-body-tertiary sticky-top">
       <div className="container-fluid">
@@ -27,7 +70,7 @@ function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="bg-transparent border-0 d-lg-none"
+            className="navbar-toggler d-lg-none border-0 rounded-0 shadow-none"
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#sideNav"
@@ -46,7 +89,10 @@ function Navbar() {
             Shoply
           </NavLink>
 
-          {/* Desktop Navigation */}
+          {/* =========================
+              Desktop Navigation
+          ========================= */}
+
           <div className="d-none d-lg-flex align-items-center gap-4">
 
             {/* Home */}
@@ -89,25 +135,25 @@ function Navbar() {
                 className="dropdown-menu overflow-auto"
                 style={{ maxHeight: "300px" }}
               >
-
                 {categories.map((category) => (
                   <li key={category.slug}>
-                    <NavLink
+                    <button
+                      type="button"
                       className="dropdown-item"
-                      to={`/categories/${category.slug}`}
+                      onClick={() =>
+                        handleCategoryClick(category)
+                      }
                     >
                       {category.name}
-                    </NavLink>
+                    </button>
                   </li>
                 ))}
-
               </ul>
 
             </div>
 
           </div>
         </div>
-
 
         {/* =========================
             Right Side
@@ -155,7 +201,6 @@ function Navbar() {
 
         </div>
 
-
         {/* =========================
             Mobile Offcanvas
         ========================= */}
@@ -187,86 +232,79 @@ function Navbar() {
 
           </div>
 
+          {/* =========================
+              Offcanvas Body
+          ========================= */}
 
-          {/* Offcanvas Body */}
           <div className="offcanvas-body">
 
             <ul className="navbar-nav">
 
               {/* Home */}
-              <li className="nav-item">
-                <NavLink
-                  to="/"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "nav-link active"
-                      : "nav-link"
+              <li className="nav-item mb-2">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-transparent w-100 text-start"
+                  onClick={() =>
+                    handleNavigation("/")
                   }
-                  data-bs-dismiss="offcanvas"
                 >
                   <i className="bi bi-house me-2"></i>
                   Home
-                </NavLink>
+                </button>
               </li>
 
-
               {/* Products */}
-              <li className="nav-item">
-                <NavLink
-                  to="/products"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "nav-link active"
-                      : "nav-link"
+              <li className="nav-item mb-2">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-transparent w-100 text-start"
+                  onClick={() =>
+                    handleNavigation("/products")
                   }
-                  data-bs-dismiss="offcanvas"
                 >
                   <i className="bi bi-grid me-2"></i>
                   Products
-                </NavLink>
+                </button>
               </li>
 
-
               {/* Cart */}
-              <li className="nav-item">
-                <NavLink
-                  to="/card"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "nav-link active"
-                      : "nav-link"
+              <li className="nav-item mb-2">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-transparent w-100 text-start"
+                  onClick={() =>
+                    handleNavigation("/card")
                   }
-                  data-bs-dismiss="offcanvas"
                 >
                   <i className="bi bi-cart me-2"></i>
                   Cart
-                </NavLink>
+                </button>
               </li>
 
-
               {/* Wishlist */}
-              <li className="nav-item">
-                <NavLink
-                  to="/wishlist"
-                  className={({ isActive }) =>
-                    isActive
-                      ? "nav-link active"
-                      : "nav-link"
+              <li className="nav-item mb-2">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-transparent w-100 text-start"
+                  onClick={() =>
+                    handleNavigation("/wishlist")
                   }
-                  data-bs-dismiss="offcanvas"
                 >
                   <i className="bi bi-heart me-2"></i>
                   Wishlist
-                </NavLink>
+                </button>
               </li>
 
+              {/* =========================
+                  Mobile Categories
+              ========================= */}
 
-              {/* Categories */}
               <li className="nav-item dropdown">
 
                 <button
-                  className="nav-link dropdown-toggle border-0 bg-transparent p-0 mt-2"
                   type="button"
+                  className="nav-link dropdown-toggle border-0 bg-transparent w-100 text-start"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
@@ -278,44 +316,40 @@ function Navbar() {
                   className="dropdown-menu overflow-auto"
                   style={{ maxHeight: "300px" }}
                 >
-
                   {categories.map((category) => (
                     <li key={category.slug}>
-
-                      <NavLink
+                      <button
+                        type="button"
                         className="dropdown-item"
-                        to={`/categories/${category.slug}`}
-                        data-bs-dismiss="offcanvas"
+                        onClick={() =>
+                          handleCategoryClick(category)
+                        }
                       >
                         {category.name}
-                      </NavLink>
-
+                      </button>
                     </li>
                   ))}
-
                 </ul>
 
               </li>
 
-
               {/* Login */}
               <li className="nav-item mt-3">
-
-                <NavLink
-                  to="/login"
+                <button
+                  type="button"
                   className="btn btn-primary w-100"
-                  data-bs-dismiss="offcanvas"
+                  onClick={() =>
+                    handleNavigation("/login")
+                  }
                 >
                   <i className="bi bi-box-arrow-in-right me-2"></i>
                   Login
-                </NavLink>
-
+                </button>
               </li>
 
             </ul>
 
           </div>
-
         </div>
 
       </div>

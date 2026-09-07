@@ -1,34 +1,107 @@
-html{
+/* =========================
+   Global
+========================= */
+
+html {
   scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+
+/* =========================
+   Navbar
+========================= */
+
+.navbar {
+  z-index: 1000;
+}
+
+.nav-link {
+  transition: all 0.3s ease !important;
+}
+
 .nav-link.active {
-
-  color: blue !important;
-
+  color: #0d6efd !important;
+  font-weight: 600;
 }
-.footer{
-  background-color: rgb(9, 2, 26);
+
+.nav-link:hover {
+  color: #0d6efd !important;
 }
+
+
+/* Hamburger */
+
+.navbar-toggler {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  transition: all 0.3s ease !important;
+}
+
+.navbar-toggler:hover {
+  background-color: rgba(13, 110, 253, 0.1) !important;
+  border-radius: 8px !important;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+.btn {
+  transition: all 0.3s ease !important;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
 .btn-outline-dark {
-  transition: transform 0.8s ease !important;
+  transition: transform 0.3s ease !important;
 }
 
 .btn-outline-dark:hover {
-  transform: scale(1.06) !important;
+  transform: scale(1.05) !important;
 }
 
-.limited{
-  background-color: rgb(9, 2, 26);
-  color: aliceblue;
+
+/* =========================
+   Cards
+========================= */
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
-.card{
-  transition: transform 0.8s ease !important;
-}
-
-.card:hover{
-  transform: scale(1.08) !important;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12) !important;
 }
 
 .card img {
@@ -36,21 +109,95 @@ html{
 }
 
 .card:hover img {
-  transform: scale(1.09);
+  transform: scale(1.05);
 }
 
+
+/* =========================
+   Limited / Discount Section
+========================= */
+
+.limited {
+  background-color: rgb(9, 2, 26);
+  color: aliceblue;
+}
+
+
+/* =========================
+   Footer
+========================= */
+
+.footer {
+  background-color: rgb(9, 2, 26);
+  color: white;
+}
+
+
+/* =========================
+   Form Inputs
+========================= */
+
+.form-control {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+
+/* =========================
+   Images
+========================= */
+
+img {
+  max-width: 100%;
+}
+
+
+/* =========================
+   Mobile
+========================= */
+
 @media screen and (max-width: 768px) {
+
   .nav-link {
-    color: blue;
-    gap: 10px;
-    border-radius: 10px 10px 10px 10px;
+    color: #0d6efd;
+    border-radius: 10px;
     transition: all 0.3s ease !important;
-    margin-bottom:3px ;
+    margin-bottom: 3px;
   }
+
   .nav-link:hover {
-    color: blue;
-    background-color: rgba(47, 47, 59, 0.2);
-    border-radius: 10px 10px 10px 10px;
-   
+    color: #0d6efd !important;
+    background-color: rgba(47, 47, 59, 0.1);
+    border-radius: 10px;
   }
+
+  .card:hover {
+    transform: translateY(-3px);
+  }
+
+  .card:hover img {
+    transform: scale(1.03);
+  }
+
+}
+
+
+/* =========================
+   Small Mobile
+========================= */
+
+@media screen and (max-width: 576px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  .btn {
+    font-size: 14px;
+  }
+
 }
