@@ -8,7 +8,7 @@ import ProductDetails from "./pages/ProductDetails";
 
 import Layout from "./layout";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import Checkout from "./pages/checkout";
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -39,7 +39,7 @@ function App() {
       {/* Auth */}
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
+    <Route path="/checkout" element={<Checkout/>} />
     </Routes>
   );
 }

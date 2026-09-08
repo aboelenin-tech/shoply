@@ -190,9 +190,15 @@ function Cart() {
                                         <span className="fs-4 fw-bold text-primary">{calcTotal().toFixed(2)}</span>
                                     </div>
 
-                                    <button className="btn btn-primary w-100 py-2 rounded-3">
+
+                                    <NavLink
+                                        to="/checkout"
+                                        className="btn btn-primary w-100 py-2 rounded-3"
+                                    >
+                                        <i className="bi bi-credit-card me-2"></i>
                                         Checkout
-                                    </button>
+                                    </NavLink>
+
                                 </div>
                             </div>
 
