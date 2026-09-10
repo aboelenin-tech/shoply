@@ -78,17 +78,19 @@ function Cart() {
 
                                             {/* Product Image */}
                                             <div className="col-12 col-md-2 text-center">
+                                                <NavLink
+                                                    to={`/products/${item.id}`}
+                                                >  <img
+                                                        src={item.thumbnail}
+                                                        alt={item.title}
+                                                        className="img-fluid"
+                                                        style={{
+                                                            height: "100px",
+                                                            width: "100px",
+                                                            objectFit: "contain",
+                                                        }}
+                                                    /></NavLink>
 
-                                                <img
-                                                    src={item.thumbnail}
-                                                    alt={item.title}
-                                                    className="img-fluid"
-                                                    style={{
-                                                        height: "100px",
-                                                        width: "100px",
-                                                        objectFit: "contain",
-                                                    }}
-                                                />
 
                                             </div>
 

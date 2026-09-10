@@ -1,17 +1,31 @@
+import useCartStore from "../store/cartStore";
+import { useNavigate } from "react-router-dom";
 
+function OrderSummary() {
+    const cart = useCartStore((state) => state.cart);
+    const calcSubtotal = useCartStore((state) => state.calcSubtotal);
+    const calcShipping = useCartStore((state) => state.calcShipping);
+    const calcTotal = useCartStore((state) => state.calcTotal);
+    const createOrder = useCartStore((state) => state.createOrder);
 
-function OrderSummary({ cart }) {
-    const subtotal = cart.reduce(
-        (total, item) =>
-            total + item.price * (item.quantity || 1),
-        0
-    );
+    const navigate = useNavigate();
 
-    const shipping = subtotal > 0 ? 10 : 0;
-    const total = subtotal + shipping;
+    const handlePlaceOrder = () => {
+        const order = createOrder();
+
+        console.log("NEW ORDER:", order);
+
+        if (order) {
+            navigate("/orders");
+        }
+    };
+
+    const subtotal = calcSubtotal();
+    const shipping = calcShipping();
+    const total = calcTotal();
 
     return (
-        <div className=" border-0 shadow-sm rounded-4">
+        <div className="border-0 shadow-sm rounded-4">
             <div className="card-body p-4">
 
                 {/* Header */}
@@ -31,6 +45,7 @@ function OrderSummary({ cart }) {
                         <h4 className="fw-bold mb-0">
                             Order Summary
                         </h4>
+
                         <small className="text-muted">
                             {cart.length} item{cart.length !== 1 ? "s" : ""}
                         </small>
@@ -47,6 +62,7 @@ function OrderSummary({ cart }) {
                                 key={item.id}
                                 className="d-flex align-items-center gap-3 mb-3"
                             >
+                                {/* Product Image */}
                                 <div
                                     className="border rounded-3 d-flex align-items-center justify-content-center"
                                     style={{
@@ -66,6 +82,7 @@ function OrderSummary({ cart }) {
                                     />
                                 </div>
 
+                                {/* Product Info */}
                                 <div className="flex-grow-1">
                                     <h6 className="mb-1 fw-semibold">
                                         {item.title.length > 28
@@ -78,6 +95,7 @@ function OrderSummary({ cart }) {
                                     </small>
                                 </div>
 
+                                {/* Product Total */}
                                 <span className="fw-semibold">
                                     ${(item.price * quantity).toFixed(2)}
                                 </span>
@@ -88,7 +106,7 @@ function OrderSummary({ cart }) {
 
                 <hr className="my-4" />
 
-                {/* Price Details */}
+                {/* Subtotal */}
                 <div className="d-flex justify-content-between mb-3">
                     <span className="text-muted">
                         Subtotal
@@ -99,13 +117,16 @@ function OrderSummary({ cart }) {
                     </span>
                 </div>
 
+                {/* Shipping */}
                 <div className="d-flex justify-content-between mb-3">
                     <span className="text-muted">
                         Shipping
                     </span>
 
                     <span className="fw-semibold">
-                        ${shipping.toFixed(2)}
+                        {shipping === 0
+                            ? "Free"
+                            : `$${shipping.toFixed(2)}`}
                     </span>
                 </div>
 
@@ -123,11 +144,16 @@ function OrderSummary({ cart }) {
                 </div>
 
                 {/* Place Order */}
-                <button className="btn btn-primary w-100 py-3 fw-semibold rounded-3">
+                <button
+                    onClick={handlePlaceOrder}
+                    disabled={cart.length === 0}
+                    className="btn btn-primary w-100 py-3 fw-semibold rounded-3"
+                >
                     <i className="bi bi-lock-fill me-2"></i>
                     Place Order
                 </button>
 
+                {/* Secure Checkout */}
                 <div className="text-center mt-3">
                     <small className="text-muted">
                         <i className="bi bi-shield-check me-1"></i>

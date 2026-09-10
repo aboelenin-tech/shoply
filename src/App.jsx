@@ -5,7 +5,7 @@ import Card from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
-
+import Orders from "./pages/orders";
 import Layout from "./layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Checkout from "./pages/checkout";
@@ -32,7 +32,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
           <Route path="/card" element={<Card />} />
-          
+          <Route path="/orders" element={<Orders />} />
         </Route>
       </Route>
 
@@ -40,6 +40,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     <Route path="/checkout" element={<Checkout/>} />
+
+    
     </Routes>
   );
 }
