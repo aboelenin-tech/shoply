@@ -43,6 +43,8 @@ function Category() {
   }
 
   return (
+    <div className="page-animation">
+ 
     <section className="container py-5">
 
       {/* Header */}
@@ -99,6 +101,8 @@ function Category() {
       )}
 
     </section>
+     
+</div>
   );
 }
 

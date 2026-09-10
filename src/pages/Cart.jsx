@@ -11,6 +11,8 @@ function Cart() {
     const calcTotal = useCartStore((state) => state.calcTotal)
     return (
         <>
+        <div className="page-animation">
+  
             <div className="p-4">
 
                 {/* Page Header */}
@@ -212,6 +214,8 @@ function Cart() {
                 </div>
 
             </div>
+           
+</div>
         </>
     );
 }

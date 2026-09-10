@@ -7,6 +7,8 @@ function Orders() {
     const orders = useCartStore((state) => state.orders);
 console.log("ORDERS:", orders);
     return (
+        <div className="page-animation">
+       
         <div className="p-4">
 
             {/* Header */}
@@ -80,6 +82,8 @@ console.log("ORDERS:", orders);
             </div>
 
         </div>
+         
+      </div>
     );
 }
 

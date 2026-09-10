@@ -61,7 +61,8 @@ function ProductCard({ product }) {
   };
 
   return (
-    <div className="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+
+    <div className="card product-card-animation card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative ">
       {/* Discount */}
       <span className="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill">
         -{Math.round(product.discountPercentage)}%

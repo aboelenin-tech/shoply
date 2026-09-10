@@ -26,6 +26,220 @@ button {
   font-family: inherit;
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+/* Page Animation */
+.page-animation {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-card-animation {
+  opacity: 0;
+  animation: cardFadeIn 0.6s ease forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   HERO ANIMATION
+========================= */
+
+.hero-content {
+  animation: heroContent 0.8s ease-out both;
+}
+
+@keyframes heroContent {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+/* Hero Title */
+
+.hero-title {
+  animation: heroTitle 0.8s ease-out 0.2s both;
+}
+
+@keyframes heroTitle {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Hero Text */
+
+.hero-text {
+  animation: heroText 0.8s ease-out 0.4s both;
+}
+
+@keyframes heroText {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Hero Buttons */
+
+.hero-buttons {
+  animation: heroButtons 0.8s ease-out 0.6s both;
+}
+
+@keyframes heroButtons {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Hero Statistics */
+
+.hero-stats {
+  animation: heroStats 0.8s ease-out 0.8s both;
+}
+
+@keyframes heroStats {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Hero Image */
+
+.hero-image {
+  animation: heroImage 1s ease-out 0.3s both;
+}
+
+@keyframes heroImage {
+  from {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+/* Floating Image */
+
+.hero-image img {
+  animation: floatingImage 4s ease-in-out infinite;
+}
+
+@keyframes floatingImage {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+  .hero-content {
+    animation-name: heroMobileContent;
+  }
+
+  .hero-image {
+    animation-name: heroMobileImage;
+  }
+
+  @keyframes heroMobileContent {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes heroMobileImage {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
 
 /* =========================
    Navbar

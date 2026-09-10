@@ -15,6 +15,47 @@ const useAuthStore = create((set) => ({
       error: null,
     });
 
+    // =========================
+    // 1. Check registered users
+    // =========================
+
+    const registeredUsers =
+      JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
+    const localUser = registeredUsers.find(
+      (user) =>
+        user.username === username &&
+        user.password === password
+    );
+
+    if (localUser) {
+      const localToken = `local-token-${localUser.id}`;
+
+      localStorage.setItem(
+        "user",
+        JSON.stringify(localUser)
+      );
+
+      localStorage.setItem("token", localToken);
+
+      set({
+        user: localUser,
+        token: localToken,
+        isAuthenticated: true,
+        loading: false,
+        error: null,
+      });
+
+      return {
+        success: true,
+        user: localUser,
+      };
+    }
+
+    // =========================
+    // 2. Try DummyJSON
+    // =========================
+
     try {
       const response = await axios.post(
         "https://dummyjson.com/auth/login",
@@ -51,7 +92,7 @@ const useAuthStore = create((set) => ({
       };
 
     } catch (error) {
-      let message = "Login failed";
+      let message = "Invalid credentials";
 
       if (error.response?.status === 429) {
         message =

@@ -6,9 +6,11 @@ import Wishlist from "./pages/Wishlist";
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Orders from "./pages/orders";
+import Checkout from "./pages/checkout";
+
 import Layout from "./layout";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Checkout from "./pages/checkout";
+
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -17,31 +19,41 @@ function App() {
   return (
     <Routes>
 
-      {/* Public Routes */}
+      {/* ================= PUBLIC ROUTES ================= */}
+
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
+
         <Route path="/products" element={<Products />} />
+
         <Route
           path="/products/:id"
           element={<ProductDetails />}
         />
+
         <Route path="/wishlist" element={<Wishlist />} />
+
+        <Route path="/register" element={<Register />} />
+
+        {/* Login WITH your Navbar */}
+        <Route path="/login" element={<Login />} />
       </Route>
 
-      {/* Protected Routes */}
+
+      {/* ================= PROTECTED ROUTES ================= */}
+
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
+
           <Route path="/card" element={<Card />} />
+
           <Route path="/orders" element={<Orders />} />
+
+          <Route path="/checkout" element={<Checkout />} />
+
         </Route>
       </Route>
 
-      {/* Auth */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    <Route path="/checkout" element={<Checkout/>} />
-
-    
     </Routes>
   );
 }

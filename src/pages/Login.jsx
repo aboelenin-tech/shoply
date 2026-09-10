@@ -39,6 +39,7 @@ function Login() {
   });
 
   return (
+    <div className="page-animation">
     <div className="container py-5">
       <div className="row justify-content-center">
         <div className="col-12 col-md-6 col-lg-5">
@@ -170,6 +171,7 @@ function Login() {
 
         </div>
       </div>
+    </div>
     </div>
   );
 }

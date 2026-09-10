@@ -7,6 +7,10 @@ function Checkout() {
     const [paymentMethod, setPaymentMethod] = useState("cash");
 
     return (
+        <div className="page-animation">
+  
+
+
         <div className="bg-light min-vh-100 py-5">
             <div className="container">
 
@@ -200,6 +204,7 @@ function Checkout() {
 
                 </div>
             </div>
+        </div>
         </div>
     );
 }

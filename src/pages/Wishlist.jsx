@@ -31,6 +31,9 @@ function Wishlist() {
     };
 
     return (
+        <div className="page-animation">
+  
+
         <div className="p-4">
 
             {/* Header */}
@@ -233,7 +236,7 @@ function Wishlist() {
                 </div>
 
             </div>
-
+            </div>
         </div>
     );
 }

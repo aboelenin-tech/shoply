@@ -147,6 +147,17 @@ function Navbar() {
               Products
             </NavLink>
 
+            <NavLink
+              to="/orders"
+              className={({ isActive }) =>
+                isActive
+                  ? "nav-link active"
+                  : "nav-link"
+              }
+            >
+             Orders
+            </NavLink> 
+
             {/* Categories */}
             <div className="dropdown">
               <button
@@ -339,6 +350,25 @@ function Navbar() {
                   Wishlist
                 </button>
               </li>
+
+              {/* Orders */}
+              <li className="nav-item mb-2">
+                <button
+                  type="button"
+                  className="nav-link border-0 bg-transparent w-100 text-start"
+                  onClick={() =>
+                    handleNavigation("/orders")
+                  }
+                >
+                  <i className="bi bi-bag-check me-2"></i>
+                  Orders
+                </button>
+              </li>
+
+
+
+
+             
 
               {/* Categories */}
               <li className="nav-item dropdown">
