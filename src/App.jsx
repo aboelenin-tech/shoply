@@ -7,6 +7,8 @@ import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
 import Orders from "./pages/orders";
 import Checkout from "./pages/checkout";
+import useThemeStore from "./store/themeStore";
+import { useEffect } from "react";
 
 import Layout from "./layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,6 +18,12 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 function App() {
+  const darkMode = useThemeStore((state) => state.darkMode);
+
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+  }, [darkMode]);
+
   return (
     <Routes>
 

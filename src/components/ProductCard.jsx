@@ -5,6 +5,7 @@ import useWishlistStore from "../store/wishlistStore";
 import useAuthStore from "../store/authStore";
 import toast from "react-hot-toast";
 
+
 function ProductCard({ product }) {
   const navigate = useNavigate();
 

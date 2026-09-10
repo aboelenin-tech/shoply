@@ -266,7 +266,7 @@ function Home() {
 
             <div className="row g-3">
 
-              {categories.slice(0, 8).map((category) => (
+              {categories.slice(0, 9).map((category) => (
 
                 <div
                   className="col-12 col-sm-4 col-md-3"

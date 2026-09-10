@@ -1,9 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import useProductStore from "../store/store";
 import useAuthStore from "../store/authStore";
+import useThemeStore from "../store/themeStore";
+import useCartStore from "../store/cartStore";
+import useWishlistStore from "../store/wishlistStore";
+
 
 function Navbar() {
   const navigate = useNavigate();
+  const darkMode = useThemeStore((state) => state.darkMode);
+const toggleDarkMode = useThemeStore(
+  (state) => state.toggleDarkMode
+);
+const cart = useCartStore((state) => state.cart);
+const wishlist = useWishlistStore((state) => state.wishlist);
 
   // =========================
   // Auth
@@ -146,6 +156,7 @@ function Navbar() {
             >
               Products
             </NavLink>
+           
 
             <NavLink
               to="/orders"
@@ -155,6 +166,7 @@ function Navbar() {
                   : "nav-link"
               }
             >
+            
              Orders
             </NavLink> 
 
@@ -197,33 +209,70 @@ function Navbar() {
         ========================= */}
 
         <div className="RightSide d-flex align-items-center gap-4">
+        <button
+  type="button"
+  className="btn btn-outline-primary rounded-circle"
+  onClick={toggleDarkMode}
+  style={{
+    width: "42px",
+    height: "42px",
+  }}
+>
+  <i
+    className={`bi ${
+      darkMode ? "bi-sun-fill" : "bi-moon-fill"
+    }`}
+  ></i>
+</button>
 
           {/* Wishlist */}
           <NavLink
-            to="/wishlist"
-            className={({ isActive }) =>
-              `text-dark fs-4 ${
-                isActive ? "text-primary" : ""
-              }`
-            }
-            aria-label="Wishlist"
-          >
-            <i className="bi bi-suit-heart"></i>
-          </NavLink>
+  to="/wishlist"
+  className={({ isActive }) =>
+    `text-dark fs-4 position-relative ${
+      isActive ? "text-primary" : ""
+    }`
+  }
+  aria-label="Wishlist"
+>
+  <i className="bi bi-heart"></i>
+
+  {wishlist.length > 0 && (
+    <span
+      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      style={{
+        fontSize: "10px",
+      }}
+    >
+      {wishlist.length}
+    </span>
+  )}
+</NavLink>
+          
 
           {/* Cart */}
           <NavLink
-            to="/card"
-            className={({ isActive }) =>
-              `text-dark fs-4 ${
-                isActive ? "text-primary" : ""
-              }`
-            }
-            aria-label="Cart"
-          >
-            <i className="bi bi-cart"></i>
-          </NavLink>
+  to="/card"
+  className={({ isActive }) =>
+    `text-dark fs-4 position-relative ${
+      isActive ? "text-primary" : ""
+    }`
+  }
+  aria-label="Cart"
+>
+  <i className="bi bi-cart"></i>
 
+  {cart.length > 0 && (
+    <span
+      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      style={{
+        fontSize: "10px",
+      }}
+    >
+      {cart.length}
+    </span>
+  )}
+</NavLink>
           {/* Auth */}
           {isAuthenticated ? (
             <div className="dropdown">
