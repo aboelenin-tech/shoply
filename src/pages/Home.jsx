@@ -3,15 +3,27 @@ import { useNavigate } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import useProductStore from "../store/store";
 import heromain from "../assets/heromain.jpg";
-
+import TrackOrderBanner from "../components/orderBanner";
 function Home() {
   const navigate = useNavigate();
-
+  const categories = [
+    { name: "Beauty", slug: "beauty" },
+    { name: "Fragrances", slug: "fragrances" },
+    { name: "Furniture", slug: "furniture" },
+    { name: "Groceries", slug: "groceries" },
+    { name: "Sports", slug: "sports" },
+    { name: "Electronics", slug: "electronics" },
+    { name: "Laptops", slug: "laptops" },
+    { name: "Mobile Accessories", slug: "mobile-accessories" },
+    { name: "Skin Care", slug: "skin-care" },
+    { name: "Men's Shirts", slug: "mens-shirts" },
+    { name: "Women's Dresses", slug: "womens-dresses" },
+  ];
   const {
+    handleCategory,
     products,
     fetchProducts,
-    categories,
-    fetchCategories,
+    
   } = useProductStore();
 
   useEffect(() => {
@@ -19,11 +31,14 @@ function Home() {
       fetchProducts();
     }
 
-    if (categories.length === 0) {
-      fetchCategories();
-    }
+    
   }, []);
 
+  const handleCategoryClick = (category) => {
+    handleCategory(category.slug);
+    navigate("/products");
+    // closeOffcanvas();
+  };
   return (
     <>
       <div className="page-animation">
@@ -241,9 +256,10 @@ function Home() {
 
         <hr />
 
+
         {/* =========================
-            SHOP BY CATEGORY
-        ========================= */}
+    SHOP BY CATEGORY
+========================= */}
         <section className="container-fluid py-5">
           <div className="container">
 
@@ -256,7 +272,6 @@ function Home() {
               <button
                 type="button"
                 className="btn btn-link text-decoration-none"
-                onClick={() => navigate("/products")}
               >
                 View All
                 <i className="bi bi-arrow-right ms-2"></i>
@@ -276,11 +291,7 @@ function Home() {
                   <button
                     type="button"
                     className="btn btn-outline-primary w-100 py-4 rounded-4"
-                    onClick={() =>
-                      navigate(
-                        `/products?category=${category.slug}`
-                      )
-                    }
+                    onClick={() => handleCategoryClick(category)}
                   >
 
                     <strong>
@@ -307,6 +318,7 @@ function Home() {
 
         <hr />
 
+        <TrackOrderBanner />
         {/* =========================
             FEATURED PRODUCTS
         ========================= */}

@@ -5,6 +5,7 @@ import useProductStore from "../store/store";
 
 function Products() {
   const {
+    allProducts,
     products,
     categories,
 
@@ -56,8 +57,13 @@ function Products() {
   // Fetch Data
 
   useEffect(() => {
-    fetchProducts();
-    fetchCategories();
+    if (allProducts.length === 0) {
+      fetchProducts();
+    }
+
+    if (categories.length === 0) {
+      fetchCategories();
+    }
   }, []);
 
   // Reset Pagination
@@ -164,11 +170,10 @@ function Products() {
 
                 <i
                   key={star}
-                  className={`bi ${
-                    star <= rating
+                  className={`bi ${star <= rating
                       ? "bi-star-fill text-warning"
                       : "bi-star text-secondary"
-                  }`}
+                    }`}
                   onClick={() =>
                     handleRating(star)
                   }
@@ -357,77 +362,75 @@ function Products() {
         {/* Pagination */}
 
         {totalPages > 1 && (
-  <nav aria-label="Products pagination" className="mt-5">
-    <ul className="pagination justify-content-center align-items-center gap-2">
+          <nav aria-label="Products pagination" className="mt-5">
+            <ul className="pagination justify-content-center align-items-center gap-2">
 
-      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-        <button
-          className="page-link rounded-3 border-0 shadow-sm px-3"
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          <i className="bi bi-chevron-left me-1"></i>
-          Previous
-        </button>
-      </li>
+              <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                <button
+                  className="page-link rounded-3 border-0 shadow-sm px-3"
+                  onClick={() => setCurrentPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                >
+                  <i className="bi bi-chevron-left me-1"></i>
+                  Previous
+                </button>
+              </li>
 
-      {Array.from(
-        {
-          length: Math.min(5, totalPages),
-        },
-        (_, index) => {
-          let pageNumber;
+              {Array.from(
+                {
+                  length: Math.min(5, totalPages),
+                },
+                (_, index) => {
+                  let pageNumber;
 
-          if (totalPages <= 5) {
-            pageNumber = index + 1;
-          } else if (currentPage <= 3) {
-            pageNumber = index + 1;
-          } else if (currentPage >= totalPages - 2) {
-            pageNumber = totalPages - 4 + index;
-          } else {
-            pageNumber = currentPage - 2 + index;
-          }
+                  if (totalPages <= 5) {
+                    pageNumber = index + 1;
+                  } else if (currentPage <= 3) {
+                    pageNumber = index + 1;
+                  } else if (currentPage >= totalPages - 2) {
+                    pageNumber = totalPages - 4 + index;
+                  } else {
+                    pageNumber = currentPage - 2 + index;
+                  }
 
-          return (
-            <li
-              key={pageNumber}
-              className={`page-item ${
-                currentPage === pageNumber ? "active" : ""
-              }`}
-            >
-              <button
-                className="page-link rounded-3 border-0 shadow-sm"
-                onClick={() => setCurrentPage(pageNumber)}
-                style={{
-                  width: "42px",
-                  height: "42px",
-                }}
+                  return (
+                    <li
+                      key={pageNumber}
+                      className={`page-item ${currentPage === pageNumber ? "active" : ""
+                        }`}
+                    >
+                      <button
+                        className="page-link rounded-3 border-0 shadow-sm"
+                        onClick={() => setCurrentPage(pageNumber)}
+                        style={{
+                          width: "42px",
+                          height: "42px",
+                        }}
+                      >
+                        {pageNumber}
+                      </button>
+                    </li>
+                  );
+                }
+              )}
+
+              <li
+                className={`page-item ${currentPage === totalPages ? "disabled" : ""
+                  }`}
               >
-                {pageNumber}
-              </button>
-            </li>
-          );
-        }
-      )}
+                <button
+                  className="page-link rounded-3 border-0 shadow-sm px-3"
+                  onClick={() => setCurrentPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                >
+                  Next
+                  <i className="bi bi-chevron-right ms-1"></i>
+                </button>
+              </li>
 
-      <li
-        className={`page-item ${
-          currentPage === totalPages ? "disabled" : ""
-        }`}
-      >
-        <button
-          className="page-link rounded-3 border-0 shadow-sm px-3"
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-          <i className="bi bi-chevron-right ms-1"></i>
-        </button>
-      </li>
-
-    </ul>
-  </nav>
-)}
+            </ul>
+          </nav>
+        )}
 
       </div>
     </div>

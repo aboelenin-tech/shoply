@@ -9,11 +9,11 @@ import useWishlistStore from "../store/wishlistStore";
 function Navbar() {
   const navigate = useNavigate();
   const darkMode = useThemeStore((state) => state.darkMode);
-const toggleDarkMode = useThemeStore(
-  (state) => state.toggleDarkMode
-);
-const cart = useCartStore((state) => state.cart);
-const wishlist = useWishlistStore((state) => state.wishlist);
+  const toggleDarkMode = useThemeStore(
+    (state) => state.toggleDarkMode
+  );
+  const cart = useCartStore((state) => state.cart);
+  const wishlist = useWishlistStore((state) => state.wishlist);
 
   // =========================
   // Auth
@@ -121,7 +121,7 @@ const wishlist = useWishlistStore((state) => state.wishlist);
           {/* Logo */}
           <NavLink
             className="navbar-brand m-2 logo me-4"
-            to="/"
+           
           >
             <i className="bi bi-bag-heart-fill me-1"></i>
             Shoply
@@ -156,7 +156,7 @@ const wishlist = useWishlistStore((state) => state.wishlist);
             >
               Products
             </NavLink>
-           
+
 
             <NavLink
               to="/orders"
@@ -166,9 +166,9 @@ const wishlist = useWishlistStore((state) => state.wishlist);
                   : "nav-link"
               }
             >
-            
-             Orders
-            </NavLink> 
+
+              Orders
+            </NavLink>
 
             {/* Categories */}
             <div className="dropdown">
@@ -209,70 +209,67 @@ const wishlist = useWishlistStore((state) => state.wishlist);
         ========================= */}
 
         <div className="RightSide d-flex align-items-center gap-4">
-        <button
-  type="button"
-  className="btn btn-outline-primary rounded-circle"
-  onClick={toggleDarkMode}
-  style={{
-    width: "42px",
-    height: "42px",
-  }}
->
-  <i
-    className={`bi ${
-      darkMode ? "bi-sun-fill" : "bi-moon-fill"
-    }`}
-  ></i>
-</button>
+          <button
+            type="button"
+            className="btn btn-outline-primary rounded-circle"
+            onClick={toggleDarkMode}
+            style={{
+              width: "42px",
+              height: "42px",
+            }}
+          >
+            <i
+              className={`bi ${darkMode ? "bi-sun-fill" : "bi-moon-fill"
+                }`}
+            ></i>
+          </button>
 
           {/* Wishlist */}
           <NavLink
-  to="/wishlist"
-  className={({ isActive }) =>
-    `text-dark fs-4 position-relative ${
-      isActive ? "text-primary" : ""
-    }`
-  }
-  aria-label="Wishlist"
->
-  <i className="bi bi-heart"></i>
+            to="/wishlist"
+            className={({ isActive }) =>
+              `text-dark fs-4 position-relative ${isActive ? "text-primary" : ""
+              }`
+            }
+            aria-label="Wishlist"
+          >
+            <i className="bi bi-heart"></i>
 
-  {wishlist.length > 0 && (
-    <span
-      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-      style={{
-        fontSize: "10px",
-      }}
-    >
-      {wishlist.length}
-    </span>
-  )}
-</NavLink>
-          
+            {wishlist.length > 0 && (
+              <span
+                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style={{
+                  fontSize: "10px",
+                }}
+              >
+                {wishlist.length}
+              </span>
+            )}
+          </NavLink>
+
 
           {/* Cart */}
           <NavLink
-  to="/card"
-  className={({ isActive }) =>
-    `text-dark fs-4 position-relative ${
-      isActive ? "text-primary" : ""
-    }`
-  }
-  aria-label="Cart"
->
-  <i className="bi bi-cart"></i>
+            to="/card"
+            className={({ isActive }) =>
+              `text-dark fs-4 position-relative ${isActive ? "text-primary" : ""
+              }`
+            }
+            aria-label="Cart"
+          >
+            <i className="bi bi-cart"></i>
 
-  {cart.length > 0 && (
-    <span
-      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-      style={{
-        fontSize: "10px",
-      }}
-    >
-      {cart.length}
-    </span>
-  )}
-</NavLink>
+            {cart.length > 0 && (
+              <span
+                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                style={{
+                  fontSize: "10px",
+                }}
+              >
+                {cart.length}
+              </span>
+            )}
+          </NavLink>
           {/* Auth */}
           {isAuthenticated ? (
             <div className="dropdown">
@@ -417,7 +414,7 @@ const wishlist = useWishlistStore((state) => state.wishlist);
 
 
 
-             
+
 
               {/* Categories */}
               <li className="nav-item dropdown">
