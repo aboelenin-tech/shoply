@@ -1,6 +1,7 @@
 import { create } from "zustand";
-
-const useWishlistStore = create((set) => ({
+import { persist } from "zustand/middleware";
+const useWishlistStore = create(
+  persist((set) => ({
   wishlist: [],
 
   addToWishlist: (product) => {
@@ -32,6 +33,8 @@ const useWishlistStore = create((set) => ({
       ),
     }));
   },
-}));
+}),
+{name:"wishlist-storage"},
+));
 
 export default useWishlistStore;

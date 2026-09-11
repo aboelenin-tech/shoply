@@ -1,6 +1,7 @@
 import { create } from "zustand";
-
-const useCartStore = create((set, get) => ({
+import { persist } from "zustand/middleware";
+const useCartStore = create(
+  persist((set, get) => ({
   cart: [],
   orders: [],
 
@@ -126,6 +127,9 @@ const useCartStore = create((set, get) => ({
 
     return newOrder;
   },
-}));
+}),
+{name:"cart-storade",}
+  )
+);
 
 export default useCartStore;
