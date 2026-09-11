@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import axios from "axios";
+import useCartStore from "./cartStore";
+import useWishlistStore from "./wishlistStore";
 
 const useAuthStore = create((set) => ({
   user: JSON.parse(localStorage.getItem("user")) || null,
@@ -15,12 +17,10 @@ const useAuthStore = create((set) => ({
       error: null,
     });
 
-    // =========================
-    // 1. Check registered users
-    // =========================
-
     const registeredUsers =
-      JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      JSON.parse(
+        localStorage.getItem("registeredUsers")
+      ) || [];
 
     const localUser = registeredUsers.find(
       (user) =>
@@ -36,7 +36,10 @@ const useAuthStore = create((set) => ({
         JSON.stringify(localUser)
       );
 
-      localStorage.setItem("token", localToken);
+      localStorage.setItem(
+        "token",
+        localToken
+      );
 
       set({
         user: localUser,
@@ -51,10 +54,6 @@ const useAuthStore = create((set) => ({
         user: localUser,
       };
     }
-
-    // =========================
-    // 2. Try DummyJSON
-    // =========================
 
     try {
       const response = await axios.post(
@@ -90,7 +89,6 @@ const useAuthStore = create((set) => ({
         success: true,
         user: data,
       };
-
     } catch (error) {
       let message = "Invalid credentials";
 
@@ -115,8 +113,19 @@ const useAuthStore = create((set) => ({
   },
 
   logout: () => {
+    // Clear authentication
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+
+    // Clear cart
+    useCartStore.getState().clearCart();
+
+    // Clear wishlist
+    useWishlistStore.getState().clearWishlist();
+
+    // Clear persisted cart and wishlist
+    localStorage.removeItem("cart-storage");
+    localStorage.removeItem("wishlist-storage");
 
     set({
       user: null,
